@@ -34,6 +34,7 @@ export default function Home() {
 
   return (
     <>
+    <video autoPlay muted loop playsInline src={require('../public/img/background.mp4')} />
      <Kakao />
       {
         list && list.slice(0, page).map(v=>(
