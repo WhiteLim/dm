@@ -1,0 +1,98 @@
+.detail_page {
+    width: 640px;
+    color: white;
+    background-color: black;
+    .user_info {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        .info_box {
+            width: 417px;
+            height: 119px;
+            background-image: url("../../../../public/img/detail/info_box.png");
+            background-repeat: no-repeat;
+            > div {
+                width: 300px;
+                height: 100px;
+                padding: 26px 0 0;
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                span {
+                    width: 60px;
+                    font-size: 22px;
+                }
+                > div {
+                    width: 180px;
+                    height: 60px;
+                    padding: 0;
+                    display: flex;
+                    align-items: center;
+                    img {
+                        width: 24px;
+                        margin: 4px 0;
+                    }
+                    p {
+                        margin: 0;
+                        font-size: 24px;
+                    }
+                }
+            }
+        }
+    }
+    .dg_info {
+        width: 580px;
+        height: 580px;
+        margin: 0 auto;
+        background-image: url("../../../../public/img/detail/dg_detail.png");
+        background-repeat: no-repeat;
+        h3 {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .dg_data {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .left_data {
+                .like {
+                    img {
+                    }
+                }
+                .dg_img {
+                    img {
+                    }
+                }
+            }
+            .right_data {
+                list-style-type: none;
+                li {
+                    width: 280px;
+                    height: 90px;
+                    white-space: pre-line;
+                    position: relative;
+                    background-image: url("../../../../public/img/detail/dg_info.png");
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    p {
+                        position: absolute;
+                        top: 20px;
+                        left: 86px;
+                        height: 30px;
+                        color: #092b4f;
+                    }
+                    span {
+                        position: absolute;
+                        left: 106px;
+                        bottom: 20px;
+                        height: 30px;
+                    }
+                }
+            }
+        }
+        .description {
+            p {
+            }
+        }
+    }
+}

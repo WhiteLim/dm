@@ -1,4 +1,10 @@
-@font-face { font-family: 'neodgm_code'; src: url('https://neodgm.dalgona.dev/fonts/neodgm_code.woff2') format('woff2'); font-weight: normal; font-style: normal; }
-body{margin:0; padding:0; background-color: #01050c;}
-p,h1,ul,li,figure {margin:0;padding:0;}
+@font-face { 
+    font-family: 'neodgm_code'; 
+    src: url('../public/assets/font/neodgm_code.woff2') format('woff2'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+body{margin:0; padding:0; background-color: #fff; font-family: 'neodgm_code';}
+p,h1,ul,li,figure {margin:0;padding:0; font-family: 'neodgm_code';}
+ul {list-style: none;}
 *{box-sizing: border-box;}
