@@ -13,13 +13,16 @@
     object-fit: cover;
   }
   .main_logo{
+    background: url('/img/member/join/bg_.png') no-repeat;
+    background-size: cover;
+    mix-blend-mode: lighten;
     position: absolute;
     top: 0; left: 0;
     height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
     >img{
       margin: 0 auto;
       width: 70%;
@@ -46,13 +49,13 @@
     }
   
     .loadlast {
-      height: 100%;
       >div {
       height: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
+      justify-content: flex-start;
+      gap: 100px;
         >div > a{
           margin-top: 100px;
         }
