@@ -1,0 +1,40 @@
+.modal_page {
+    width: 640px;
+    height: 100vh;
+    color: white;
+    background-color: rgba(0, 0, 0,0.7);
+    position: absolute;
+    left: 0%;
+    .modal {
+        background-image: url("../../../../public/img/detail/modal.png");
+        background-repeat: no-repeat;
+        text-shadow: 2px 1px 0 #1f93ff;
+        margin: 0 20px;
+        position: absolute;
+        top: 50%;
+        width: 600px;
+        height: 500px;
+        div {
+            h3 {
+                padding: 40px 0;
+                font-size: 22px;
+                text-align: center;
+            }
+            p {
+                width: 500px;
+                margin: 0 auto;
+                line-height: 36px;
+            }
+        }
+        span {
+            position: absolute;
+            bottom: 26px;
+            width: 200px;
+            margin: 0 200px;
+            padding: 16px 0;
+            font-size: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+}
