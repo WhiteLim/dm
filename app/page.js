@@ -12,7 +12,7 @@ export default function page() {
     //로딩 화살표 ing
     //const loadingimg = document.querySelector('.loading');
 
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 16; i++) {
       loadingimg.current.innerHTML += "<img src='img/intro/Vector (1).png'>"
     }
 
@@ -27,7 +27,7 @@ export default function page() {
 
     //로딩이 끝났을 때 바뀌는 화면
     setTimeout(() => {
-      setLoading(false);
+      //setLoading(false);
     }, 4000);
   }, []);
 
