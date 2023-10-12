@@ -1,7 +1,11 @@
 /** @type {import('next').NextConfig} */
-const withVideos = require('next-videos')
+const withPWA = require('next-pwa');
 const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: false,
 }
 
-module.exports = withVideos()
+module.exports = withPWA({
+    pwa: {
+      dest: 'public',
+    },
+  });

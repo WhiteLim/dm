@@ -55,7 +55,6 @@ export default function page() {
 
   return (
     <div className={join.join_wrap}>
-      <video autoPlay muted loop playsInline src={require('../../../../public/img/background.mp4')} />
       <figure className={join.bg}><Image src={bg} alt="배경이미지"/></figure>
       <div className={join.join_con1_wrap}>
         <div className={join.con1}>
