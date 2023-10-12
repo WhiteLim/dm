@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation';
 import style from './pages/intro/page.module.scss'
 import KakaoLogin from 'react-kakao-login';
 import axios from 'axios';
@@ -7,6 +8,7 @@ import axios from 'axios';
 export default function page() {
   const [loading, setLoading] = useState(true);
   const loadingimg = useRef();
+  const navi = useRouter()
 
   useEffect(() => {
     //로딩 화살표 ing
@@ -27,7 +29,7 @@ export default function page() {
 
     //로딩이 끝났을 때 바뀌는 화면
     setTimeout(() => {
-      //setLoading(false);
+      setLoading(false);
     }, 4000);
   }, []);
 
@@ -35,11 +37,10 @@ export default function page() {
     const u_id = response.profile.id;
     const u_nick = response.profile.properties.nickname;
     const d = await axios.post('/api/member',{u_id,u_nick})
-    console.log(d.data);
     if(d.data[0] == false) {
-      console.log("회원가입하셈"+d.data[1]);
+      navi.push('./pages/member/join',d.data[1])
     } else {
-      console.log("이미 회원이셈");
+      navi.push('./pages/main')
     }
   };
 
