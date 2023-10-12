@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
-import style from './pages/Intro/page.module.scss'
+import style from './pages/intro/page.module.scss'
 import KakaoLogin from 'react-kakao-login';
 
 export default function page() {
