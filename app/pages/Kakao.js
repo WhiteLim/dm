@@ -21,12 +21,26 @@ const Kakao = () => {
   return (
     <div>
       <h1>Kakao Login Example</h1>
-      <KakaoLogin 
+
+<KakaoLogin
         token={process.env.NEXT_PUBLIC_KAKAO_JS_KEY}
         onSuccess={handleKakaoLogin}
         onFail={console.error}
         onLogout={console.info}
-      />
+    render={({ onClick }) => {
+      return (
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
+            onClick();
+          }}
+        >
+        <img src="/btn.png" alt='' />
+                  </a>
+      );
+    }}
+  />
     </div>
   );
 };
