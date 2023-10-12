@@ -1,8 +1,32 @@
-const path = require("path");
+/** @type {import('next').NextConfig} */
+const withPlugins = require("next-compose-plugins");
+const withPWA = require("next-pwa");
+const nextConfig = {
+    reactStrictMode: false,
+}
+
+module.exports = withPlugins(
+	[
+		[
+			withPWA,
+			{
+				pwa: {
+					dest: "public",
+				},
+			},
+		],
+		// 추가 플러그인 작성
+	],
+	nextConfig
+);
+
+
+
+/* const path = require("path");
 const withPWAInit = require("next-pwa");
 
 const nextConfig = {
-    reactStrictMode: true,
+    reactStrictMode: false,
     webpack: (config) => {
       const entry = generateAppDirEntry(config.entry);
       config.entry = () => entry;
@@ -36,4 +60,4 @@ const generateAppDirEntry = (entry) => {
 
 
 
-module.exports = withPWA(nextConfig);
+module.exports = withPWA(nextConfig); */

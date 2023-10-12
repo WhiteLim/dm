@@ -1,9 +1,6 @@
 import React from 'react'
 
 export default function Heads() {
-
-
-
   return (
     <head>
         <meta name="application-name" content="Digimon Main - DM" />

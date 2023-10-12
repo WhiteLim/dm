@@ -13,7 +13,7 @@
     object-fit: cover;
   }
   .main_logo{
-    background: url('/img/member/join/bg_.png') no-repeat;
+    &.bg{background: url('/img/member/join/bg_.png') no-repeat;}
     background-size: cover;
     mix-blend-mode: lighten;
     position: absolute;
