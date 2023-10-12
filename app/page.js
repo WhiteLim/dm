@@ -61,25 +61,25 @@ export default function page() {
           <section className={style.loadlast}>
             <div>
               <img src="/img/intro/WELCOME TO DIGITAL WORLD.png" alt="" />
-            <KakaoLogin
-                token={process.env.NEXT_PUBLIC_KAKAO_JS_KEY}
-                onSuccess={handleKakaoLogin}
-                onFail={console.error}
-                onLogout={console.info}
-                render={({ onClick }) => {
-                  return (
-                    <a
-                      href="#"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        onClick();
-                      }}
-                    >
-                      <img src="/img/intro/Group 181.png" alt='' />
-                    </a>
-                  );
-                }}
-              /> 
+              <KakaoLogin
+                  token={process.env.NEXT_PUBLIC_KAKAO_JS_KEY}
+                  onSuccess={handleKakaoLogin}
+                  onFail={console.error}
+                  onLogout={console.info}
+                  render={({ onClick }) => {
+                    return (
+                      <a
+                        href="#"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          onClick();
+                        }}
+                      >
+                        <img src="/img/intro/Group 181.png" alt='' />
+                      </a>
+                    );
+                  }}
+                /> 
             </div>
           </section>
         )}
