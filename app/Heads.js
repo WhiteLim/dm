@@ -1,20 +1,7 @@
-"use client"
-import React, { useEffect } from 'react'
+import React from 'react'
 
 export default function Heads() {
 
-  
-/* 
-  useEffect(()=>{
-    if ('serviceWorker' in navigator) { // 서비스 워커 지원 확인
-      const reg = async ()=>{
-        const regInt = await navigator.serviceWorker.register('/sw.js')
-
-        regInt.waiting?.postMessage('SKIP')
-      }
-      reg()
-    }
-  },[]) */
 
 
   return (
