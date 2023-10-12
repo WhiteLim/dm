@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import style from './pages/intro/page.module.scss'
 import KakaoLogin from 'react-kakao-login';
+import axios from 'axios';
 
 export default function page() {
   const [loading, setLoading] = useState(true);
@@ -12,14 +13,14 @@ export default function page() {
     //const loadingimg = document.querySelector('.loading');
 
     for (let i = 0; i < 8; i++) {
-      loadingimg.current.innerHTML += "<img src='/img/intro/vector (1).png'>"
+      loadingimg.current.innerHTML += "<img src='./img/intro/vector (1).png'>"
     }
 
 
     const loadImg2 = loadingimg.current.childNodes;
     loadImg2.forEach((v, k) => {
       setTimeout(() => {
-        v.src = "/img/intro/vector.png"
+        v.src = "./img/intro/vector.png"
       }, 200 * k)
     }, []);
 
