@@ -1,8 +1,12 @@
+// @import url("../../../globals.scss");
+
 .detail {
+    font-family: "neodgm_code";
     width: 640px;
     color: white;
     background-color: black;
     position: relative;
+    margin: 0 auto;
     .detail_page {
         .user_info {
             display: flex;
@@ -13,7 +17,8 @@
                 height: 119px;
                 background-image: url("../../../../public/img/detail/info_box.png");
                 background-repeat: no-repeat;
-                > div {
+                position: relative;
+                .inner_box {
                     width: 300px;
                     height: 100px;
                     padding: 24px 0 0;
@@ -21,9 +26,10 @@
                     align-items: center;
                     justify-content: space-around;
                     span {
-                        width: 60px;
+                        width: 100px;
                         padding-top: 20px;
                         font-size: 22px;
+                        text-align: center;
                         text-shadow: 2px 1px 0 #1f93ff;
                     }
                     > div {
@@ -32,6 +38,7 @@
                         padding: 0;
                         display: flex;
                         align-items: center;
+                        justify-content: space-between;
                         img {
                             width: 24px;
                             margin: 4px 0;
@@ -40,6 +47,17 @@
                             margin: 0;
                             font-size: 24px;
                             text-shadow: 2px 1px 0 #1f93ff;
+                        }
+                    }
+                }
+                .user_profile {
+                    position: absolute;
+                    right: 30px;
+                    top: 20px;
+                    > p {
+                        img {
+                            width: 70px;
+                            height: 70px;
                         }
                     }
                 }
@@ -190,6 +208,7 @@
                     word-wrap: break-word;
                     word-break: keep-all;
                     text-shadow: 2px 1px 0 #1f93ff;
+                    cursor: pointer;
                 }
                 .description_more {
                     width: 20px;
@@ -205,6 +224,7 @@
                     font-size: 22px;
                     text-align: center;
                     text-shadow: 2px 1px 0 #1f93ff;
+                    cursor: pointer;
                 }
             }
         }
@@ -266,7 +286,7 @@
         .dg_review {
             width: 610px;
             height: 350px;
-            margin: 30px auto;
+            margin: 30px auto 0;
             background-image: url("../../../../public/img/detail/review_box.png");
             background-repeat: no-repeat;
             background-size: cover;
@@ -302,7 +322,7 @@
                         align-items: center;
                         justify-content: space-between;
                         .review_text {
-                            width: 245px;
+                            width: 300px;
                             text-overflow: ellipsis;
                             overflow: hidden;
                             display: -webkit-box;
@@ -310,26 +330,30 @@
                             -webkit-box-orient: vertical;
                             word-wrap: break-word;
                             word-break: keep-all;
+                            font-size: 16px;
+                            font-family: "Noto Sans KR";
                         }
                         div {
-                            width: 45%;
+                            width: 34%;
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
-                            font-size: 14px;
+                            font-size: 12px;
                             .user_text {
-                                width: 110px;
+                                width: 90px;
                                 display: flex;
                                 align-items: center;
                                 img {
-                                    width: 20px;
-                                    height: 20px;
+                                    width: 16px;
+                                    height: 16px;
                                 }
                                 p {
+                                    font-family: "Noto Sans KR";
                                 }
                             }
                             span {
                                 width: 40%;
+                                font-family: "Noto Sans KR";
                             }
                         }
                     }
@@ -344,6 +368,60 @@
                 background-color: #00f3ff;
                 background-clip: padding-box;
                 border: 3px solid transparent;
+            }
+        }
+        .search_area {
+            form {
+                display: flex;
+                align-items: center;
+                position: relative;
+                margin-bottom: 36px;
+                label {
+                    margin: 0 auto;
+                    input:focus {
+                        outline: none;
+                    }
+                    &:nth-of-type(1) {
+                        background-image: url("../../../../public/img/detail/search_box.png");
+                        background-repeat: no-repeat;
+                        background-position: cover;
+                        background-size: 580px 100px;
+                        width: 600px;
+                        height: 90px;
+                        input {
+                            font-family: "Noto Sans KR";
+                            color: #ffffff;
+                            width: 400px;
+                            height: 50px;
+                            font-size: 18px;
+                            margin: 14px 0 0 40px;
+                            transform: translateY(14px);
+                        }
+                    }
+                    &:nth-of-type(2) {
+                        position: absolute;
+                        right: 60px;
+                        bottom: 6px;
+                        background-image: url("../../../../public/img/detail/search_btn.png");
+                        background-repeat: no-repeat;
+                        background-position: cover;
+                        background-size: 115px 55px;
+                        width: 115px;
+                        height: 60px;
+                        input {
+                            width: 115px;
+                            height: 55px;
+                            color: #092b4f;
+                            font-size: 18px;
+                            font-family: "neodgm_code";
+                            text-shadow: 2px 1px 0 #1f93ff;
+                        }
+                    }
+                    input {
+                        border: none;
+                        background: none;
+                    }
+                }
             }
         }
         .Evolution_process {
@@ -361,7 +439,10 @@
                     }
                 }
                 ul {
+                    display: flex;
+                    flex-wrap: wrap;
                     .Evolution_list {
+                        padding: 16px 0;
                         .Evolution_data {
                             width: 140px;
                             margin: 0 26px;
@@ -432,7 +513,10 @@
                     }
                 }
                 ul {
+                    display: flex;
+                    flex-wrap: wrap;
                     .Evolution_list {
+                        padding: 16px 0;
                         .Evolution_data {
                             width: 140px;
                             margin: 0 26px;
