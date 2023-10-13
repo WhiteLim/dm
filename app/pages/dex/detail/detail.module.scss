@@ -2,12 +2,17 @@
 
 .detail {
     font-family: "neodgm_code";
-    width: 640px;
+    max-width: 640px;
+    height: 100vh;
     color: white;
     background-color: black;
     position: relative;
     margin: 0 auto;
+    background: url('/img/member/join/bg_.png') no-repeat;
+    background-size: cover;
+    mix-blend-mode: lighten;
     .detail_page {
+        padding:50px 0 150px;  
         .user_info {
             display: flex;
             align-items: center;
@@ -15,7 +20,7 @@
             .info_box {
                 width: 417px;
                 height: 119px;
-                background-image: url("../../../../public/img/detail/info_box.png");
+                background-image: url("/img/detail/info_box.png");
                 background-repeat: no-repeat;
                 position: relative;
                 .inner_box {
@@ -67,7 +72,7 @@
             width: 580px;
             height: 580px;
             margin: 36px auto;
-            background-image: url("../../../../public/img/detail/dg_detail.png");
+            background-image: url("/img/detail/dg_detail.png");
             background-repeat: no-repeat;
             h3 {
                 padding: 24px 0 20px;
@@ -166,7 +171,7 @@
                         width: 280px;
                         height: 90px;
                         position: relative;
-                        background-image: url("../../../../public/img/detail/dg_info.png");
+                        background-image: url("/img/detail/dg_info.png");
                         background-size: contain;
                         background-repeat: no-repeat;
                         p {
@@ -232,7 +237,7 @@
             width: 580px;
             height: 280px;
             margin: 0 auto;
-            background-image: url("../../../../public/img/detail/skill_info.png");
+            background-image: url("/img/detail/skill_info.png");
             background-repeat: no-repeat;
             position: relative;
             .skill_gif {
@@ -287,7 +292,7 @@
             width: 610px;
             height: 350px;
             margin: 30px auto 0;
-            background-image: url("../../../../public/img/detail/review_box.png");
+            background-image: url("/img/detail/review_box.png");
             background-repeat: no-repeat;
             background-size: cover;
             position: relative;
@@ -310,7 +315,7 @@
                 .review_list {
                     width: 510px;
                     height: 70px;
-                    background-image: url("../../../../public/img/detail/user_review.png");
+                    background-image: url("/img/detail/user_review.png");
                     background-repeat: no-repeat;
                     background-size: contain;
                     padding: 22px 0;
@@ -382,7 +387,7 @@
                         outline: none;
                     }
                     &:nth-of-type(1) {
-                        background-image: url("../../../../public/img/detail/search_box.png");
+                        background-image: url("/img/detail/search_box.png");
                         background-repeat: no-repeat;
                         background-position: cover;
                         background-size: 580px 100px;
@@ -402,7 +407,7 @@
                         position: absolute;
                         right: 60px;
                         bottom: 6px;
-                        background-image: url("../../../../public/img/detail/search_btn.png");
+                        background-image: url("/img/detail/search_btn.png");
                         background-repeat: no-repeat;
                         background-position: cover;
                         background-size: 115px 55px;

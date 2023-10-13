@@ -1,15 +1,23 @@
 "use client"
-import React, { useContext, useState } from 'react'
+import React, {  useState } from 'react'
 import de from './detail.module.scss'
 import Modal from '../../../comp/dex/detail/Modal'
-import { DataContext } from './context'
+import Footer from '@/app/comp/Footer'
 
 
 export default function page() {
     // 모달 버튼 클릭 유무를 저장할 state
     const [showModal, setShowModal] = useState(false)
     // 버튼 클릭시 모달 버튼 클릭 유무를 설정하는 state 함수
-    const clickModal = () => setShowModal(!showModal)
+    const clickModal = () => { 
+        setShowModal(!showModal);
+        const body = document.querySelector('body');
+        if(!showModal){
+            body.style="overflow:hidden"
+        } else {
+            body.style="overflow:auto"
+        }
+    }
 
     let data_input = (e) => {
         e.preventDefault();
@@ -240,6 +248,7 @@ export default function page() {
                     </div>
                 </div>
             </div>
+            <Footer />
         </section>
 
     )
