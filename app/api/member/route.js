@@ -10,10 +10,8 @@ export async function POST(req) {
     const insert = await req.json();
     let data = await qe(`SELECT * from dm_member where mb_id = ${insert.u_id}`);
     if(data.length == 0){
-        console.log(data);
         datacheck = false;
-        let at = [datacheck,insert.u_id]
-        return Response.json(at);
+        return Response.json(datacheck);
     } else {
         datacheck = true;
         return Response.json(datacheck);

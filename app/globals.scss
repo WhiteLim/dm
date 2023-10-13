@@ -34,7 +34,26 @@
 
 // 기본폰트 디지몬 font-family: 'neodgm_code';
 // 노토산스 font-family: 'Noto Sans KR', sans-serif;
-body{margin:0; padding:0; height: 100vh; background-color: #000; font-family: 'neodgm_code';}
+body{margin:0; padding:0; height: 100vh; color: #fff; background-color: #000; font-family: 'neodgm_code';}
 p,h1,ul,li,figure,h2,h3 {margin:0;padding:0; font-family: 'neodgm_code';}
 ul {list-style: none;}
 *{box-sizing: border-box;}
+
+
+// Footer 
+.footer {
+    max-width: 640px; width: 100%;
+    position: fixed;
+    bottom:0; left:0; right:0; margin:0 auto;
+    border-top:1px solid #00F3FF;
+    background: #000D1B;
+    div {
+        padding:20px;
+        figure{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            img {width: 100%; height: 100%; object-fit: cover; }
+        }
+    }
+}
