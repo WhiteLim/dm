@@ -15,7 +15,7 @@ export default function LoginCheck() {
     let login = checkst();
     let move;
   
-    if(login == 0 || !login) {
+    if(login == 0 ) {
       move = './pages/intro';
     } else {
       move = './pages/main';

@@ -9,9 +9,9 @@ var connection = mysql.createConnection({
 
   connection.connect();
 
-export async function qe(str,value){
+export async function qe(str){
   let data =  await new Promise((resolve, reject)=>{
-    connection.query(str, value, function (error, results) {
+    connection.query(str, function (error, results) {
       resolve(results);
     });
   });

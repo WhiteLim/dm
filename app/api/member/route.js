@@ -11,7 +11,8 @@ export async function POST(req) {
     let data = await qe(`SELECT * from dm_member where mb_id = ${insert.u_id}`);
     if(data.length == 0){
         datacheck = false;
-        return Response.json(datacheck);
+        let at = [datacheck,insert.u_id]
+        return Response.json(at);
     } else {
         datacheck = true;
         return Response.json(datacheck);

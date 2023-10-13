@@ -8,17 +8,17 @@ import axios from 'axios';
 export default function page() {
   const navi = useRouter()
 
-
   const handleKakaoLogin =async (response) => {
     const u_id = response.profile.id;
     const u_nick = response.profile.properties.nickname;
     const d = await axios.post('/api/member',{u_id,u_nick})
-    if(d.data[0] == false) {
-      navi.push('./member/join',u_id)
+     if(d.data[0] == false) {
+      sessionStorage.setItem('u_id',u_id)
+      navi.push( './member/join')
     } else {
       localStorage.setItem('loginstate',u_id)
       navi.push('./main')
-    }
+    } 
   };
 
   return (
