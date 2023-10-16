@@ -61,7 +61,7 @@ export default function Join2({setList,setNickName,setUimg}) {
 
   useEffect(()=>{
     setTimeout(() => {
-          let h = window.innerHeight + btnh.current.clientHeight;
+          let h = window.innerHeight + ( btnh.current.clientHeight / 2 );
           winHeight.current.style.setProperty('height', `${h}px`);
         },100);
   },[])
