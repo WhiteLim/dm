@@ -19,8 +19,9 @@ export default function Join2({setList,setNickName,setUimg}) {
   let winHeight = useRef();
   useEffect(()=>{
     input.current.focus();
-    let h = window.innerHeight + 110;
-    winHeight.current.style.setProperty('height', `${h}px`);
+      let h = window.innerHeight + 110;
+      winHeight.current.style.setProperty('height', `${h}px`);
+
   },[])
 
   const [name, setName] = useState(''); 

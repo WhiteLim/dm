@@ -2,7 +2,6 @@
   width: 100%;
   max-width: 640px;
   background-color: #000;
-  height: 100vh;
   margin: 0 auto;
   .bg{
     background: url(/img/main/bg.png);
@@ -11,7 +10,7 @@
     height: 100%;
     max-width: 640px;
     margin: 0 auto;
-    background-size: cover;
+    background-size:100% 100%;
     object-fit: cover;
     // opacity: 0.6;
     .logo_nick{
@@ -31,7 +30,7 @@
         .nick_txt{
           position:absolute;
           top:calc(100% / 2 - 35px);
-          left:calc(100% / 2 - 177px);
+          right:calc(100% / 2 - 177px);
           display: flex;
           align-items: center;
           >span{
@@ -44,7 +43,7 @@
             }
             &:nth-of-type(2){
               font-size: 24px;
-              margin-right: 60px;
+              margin-right: 15px;
               margin-top: 15px;
             }
           }
@@ -59,7 +58,7 @@
     }
     .search_input{
       max-width: 95%;
-      margin: 0 auto 70px;
+      margin: 0 auto 50px;
       position: relative;
       .search{
         font-size: 0;
@@ -86,10 +85,200 @@
       }
     }
     .random_wrap{
-      max-width: 95%;
-      margin: 0 auto;
-      .random{
+      margin: 0 auto 50px;
+      .random_img{
+        max-width: 95%;
         font-size: 0;
+        margin: 0 auto 10px;
+      }
+      .random_digimon_wrap{
+        padding-left: 25px;
+        .myswiper{
+          display: flex;
+          .swipers{
+            .random_digimon_wraps{
+              font-size: 0;
+              margin-bottom: 10px;
+            }
+            .random_digimon{
+              font-size: 0;
+              position: absolute;
+              top:calc(50% - 88px);
+              left: calc(50% - 57px);
+              opacity: .5;
+            }
+            .random_digimon_box_wrap{
+              position: relative;
+              figure{
+                font-size: 0;
+              }
+              >p{
+                position: absolute;
+                top:calc(100% / 2 - 8px);
+                width:100%;
+                text-align: center;
+                text-shadow: 2px 2px 0px #1F93FF;
+              }
+            }
+          }
+        }
+      }
+    }
+    .today_wrap{
+      max-width: 95%;
+      margin: 0 auto 50px;
+      .today_img{
+        font-size: 0;
+      }
+      .today_text_wrap{
+        position: relative;
+        bottom: 40px;
+        .today_text_wrap_img{
+          font-size: 0;
+          text-align: center;
+        }
+        .today_ab{
+          display: flex;
+          justify-content: space-evenly;
+          position: absolute;
+          top: calc(50% - 107px);
+          width: 100%;
+          .today_ab_left{
+            position: relative;
+            display: inline-block;
+            display: flex;
+            align-items: center;
+            figure{
+              font-size: 0;
+            }
+            .today_ab_left_wrap{
+              position: absolute;
+              top: calc(50% - 56px);
+              left: calc(50% - 52px);
+            }
+          }
+          .todya_ab_right{
+            .todya_ab_right1{
+              position: relative;
+              margin-bottom: 20px;
+              .today_ab_boxs{
+                font-size: 0;
+              }
+              p{
+                position: absolute;
+                top:15px;
+                right: 80px;
+                color:#092B4F;
+                text-shadow: 2px 2px 0px #1F93FF;
+                font-size: 18px;
+              }
+            }
+            .todya_ab_right2{
+              margin-bottom: 20px;
+              position: relative;
+              &:last-child{
+                margin-bottom: 0;
+              }
+              .todya_ab_right2_box{
+                font-size: 0;
+              }
+              .todya_ab_right2_txt{
+                display: flex;
+                align-items: center;
+                position: absolute;
+                top: calc(50% - 12px);
+                left: calc(50% - 168px);
+                span{
+                  &:nth-of-type(1){
+                    font-size: 18px;
+                    margin-right: 30px;
+                  }
+                  &:nth-of-type(2){
+                    font-size: 14px;
+                  }
+                }
+                figure{
+                  font-size: 0;
+                  img{
+                    width:14px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    .today_dm_wrap{
+      padding-bottom: 50px;
+      .today_dm_imgs{
+        max-width: 95%;
+        margin: 0 auto 10px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        .today_dm_img2{
+          cursor: pointer;
+        }
+      }
+      .today_dm{
+        .myswiper2{
+          padding-left: 25px;
+          display: flex;
+          .swipers_2{
+            position: relative;
+            .today_dms_wrap{
+              font-size: 0;
+            }
+            .today_dms{
+              font-size: 0;
+              position: absolute;
+              top: calc(50% - 98px);
+              left: calc(50% - 94px);
+            }
+            .today_dm_info_wrap{
+              position: absolute;
+              bottom: 0px;
+              left: -4px;
+              .today_dm_box{
+                font-size: 0;
+              }
+              .today_dm_info{
+                position: absolute;
+                top: calc(50% - 10px);
+                left: calc(50% - 100px);
+                display: flex;
+                align-items: flex-end;
+                .today_dm_face{
+                  font-size: 0;
+                  img{
+                    width:40px;
+                  }
+                }
+                .today_dm_infos{
+                  display: flex;
+                  align-items: center;
+                  position: relative;
+                  bottom: 40px;
+                  left:5px;
+                  .today_dm_info_icon{
+                    font-size: 0;
+                    img{
+                      width:16px;
+                    }
+                  }
+                  span{
+                    text-shadow: 2px 2px 0px #1F93FF;
+                    font-size:18px;
+                  }
+                }
+                p{
+                  font-size: 18px;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
