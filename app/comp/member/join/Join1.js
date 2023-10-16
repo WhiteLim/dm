@@ -10,7 +10,8 @@ export default function Join1({list,setList}) {
   };
 
   useEffect(()=>{
-    winHeight.current.style.setProperty('height', `${window.innerHeight}px`);
+    let h = ( window.innerHeight + window.outerHeight ) / 2 ;
+    winHeight.current.style.setProperty('height', `${h}px`);
   },[])
 
   return (

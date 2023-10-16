@@ -1,7 +1,7 @@
 .all{
   .join_wrap{
     max-width:640px;
-    height: 100vh;
+    min-height: 1000px;
     margin:.0 auto;
     position: relative;
     background-color: #000;
@@ -68,7 +68,7 @@
         }
         .con1_txt{
           position: absolute;
-          bottom:35px;
+          bottom:50px;
           width:100%;
           cursor: pointer;
           .con1_txt_box{
@@ -229,6 +229,7 @@
           .create_img{
             font-size: 0;
             text-align:center;
+            height: 100%;
             img{
               width:100%;
               height:100%;
