@@ -59,15 +59,9 @@ export default function Join2({setList,setNickName,setUimg}) {
   let winHeight = useRef();
   let btnh = useRef();
 
-  useEffect(()=>{
-    setTimeout(() => {
-          let h = window.innerHeight + ( btnh.current.clientHeight / 2 );
-          winHeight.current.style.setProperty('height', `${h}px`);
-        },100);
-  },[])
   
   return (
-    <div className={join.join_wrap} ref={winHeight}>
+    <div className={join.join_wrap}>
       <video autoPlay muted loop playsInline src='/img/background.mp4'/>
       <div className={join.bg}>
         <div className={join.join_con2_wrap} ref={con2_wrap}>

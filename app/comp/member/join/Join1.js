@@ -9,13 +9,10 @@ export default function Join1({list,setList}) {
     setList(2)
   };
 
-  useEffect(()=>{
-    let h = ( window.innerHeight + window.outerHeight ) / 2 ;
-    winHeight.current.style.setProperty('height', `${h}px`);
-  },[])
+
 
   return (
-    <div className={join.join_wrap} ref={winHeight} >
+    <div className={join.join_wrap}  >
       <video autoPlay muted loop playsInline src='/img/background.mp4'/>
       <div className={join.bg}>
         <div className={join.join_con1_wrap} ref={con1_wrap}>
