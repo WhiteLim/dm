@@ -114,6 +114,7 @@
         height: 100vh;
         position: absolute;
         top:0;overflow-y: auto;
+        margin-bottom:30px;
         .con2_txt{
           display: flex;
           max-width: 95%;
@@ -254,7 +255,7 @@
           align-items: center;
           justify-content: center;
           position: relative;
-          bottom:50px;
+          bottom:80px;
           figure{
             font-size: 0;
           }
@@ -343,7 +344,7 @@
           align-items: center;
           justify-content: center;
           position: relative;
-          bottom:50px;
+          bottom:80px;
           figure{
             font-size: 0;
           }

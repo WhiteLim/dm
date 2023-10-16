@@ -7,3 +7,11 @@ export async function user_get(){
     }
 }
 
+export async function my_rank(){
+    if (typeof window !== 'undefined') {
+        const mb = localStorage.getItem('loginstate')
+        let rk = await axios.post(`/api/member/rank?mb_id=${mb}`)
+        return rk.data;
+    }
+}
+

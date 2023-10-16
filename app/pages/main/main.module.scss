@@ -24,34 +24,38 @@
       }
       .logo_nick_wrap{
         position: relative;
-        .nick_wrap{
-          font-size: 0;
-        }
+        background: url("/img/main/nick_wrap.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 72%;
         .nick_txt{
-          position:absolute;
-          top:calc(100% / 2 - 35px);
-          right:calc(100% / 2 - 177px);
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 0;
+          left: 0;
+          margin: 0 auto;
           display: flex;
           align-items: center;
-          >span{
-            color:#fff;
-            text-shadow: 2px 2px 0px #1F93FF;
-            &:nth-of-type(1){
-              font-size: 22px;
-              margin-right: 45px;
-              margin-top: 15px;
-            }
-            &:nth-of-type(2){
+          justify-content: space-evenly;
+          .nick_wrap{
+            display: flex;
+            align-items: flex-end;
+            span{
               font-size: 24px;
               margin-right: 15px;
-              margin-top: 15px;
             }
           }
-          >figure{
+          span{
+            color:#fff;
+            text-shadow: 2px 2px 0px #1F93FF;
+            font-size: 22px;
+            margin-right: 20px;
+            margin-top: 15px;
+          }
+          figure{
             font-size: 0;
-            &:nth-of-type(1){
-              margin-top: 15px;
-            }
+            margin-top:0px;
           }
         }
       }
@@ -60,16 +64,20 @@
       max-width: 95%;
       margin: 0 auto 50px;
       position: relative;
-      .search{
-        font-size: 0;
-      }
+      background-image: url("/img/main/search.png");
+      width: 100%;
+      height: 111px;
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
       .input{
         display: flex;
         position: absolute;
-        top: calc(100% / 2 - 36px);
+        top: 0px;
+        bottom: 0px;
         left: 0px;
         width: 100%;
         justify-content: space-evenly;
+        align-items: center;
         input{
           border: none;
           outline: none;
@@ -96,28 +104,45 @@
         .myswiper{
           display: flex;
           .swipers{
-            .random_digimon_wraps{
-              font-size: 0;
-              margin-bottom: 10px;
+            .swipers_1{
+              background: url("/img/main/digimon_wrap.png");
+              width: 156px;
+              height: 192px;
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+              margin-bottom: 5px;
             }
             .random_digimon{
               font-size: 0;
               position: absolute;
-              top:calc(50% - 88px);
-              left: calc(50% - 57px);
-              opacity: .5;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              text-align: center;
+              display: flex;
+              opacity: 0.5;
+              justify-content: center;
+              align-items: center;
+              height: 192px;
             }
             .random_digimon_box_wrap{
               position: relative;
-              figure{
-                font-size: 0;
-              }
-              >p{
+              background: url("/img/main/random_box.png");
+              width: 100%;
+              height: 46px;
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+              p{
                 position: absolute;
-                top:calc(100% / 2 - 8px);
-                width:100%;
+                bottom: 0;
+                top: 0;
+                display: flex;
+                width: 100%;
                 text-align: center;
                 text-shadow: 2px 2px 0px #1F93FF;
+                justify-content: center;
+                align-items: center;
               }
             }
           }
@@ -133,10 +158,11 @@
       .today_text_wrap{
         position: relative;
         bottom: 40px;
-        .today_text_wrap_img{
-          font-size: 0;
-          text-align: center;
-        }
+        background: url("/img/main/today_text_wrap.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 590px;
+        height: 324px;
         .today_ab{
           display: flex;
           justify-content: space-evenly;
@@ -210,7 +236,7 @@
       }
     }
     .today_dm_wrap{
-      padding-bottom: 50px;
+      padding-bottom: 180px;
       .today_dm_imgs{
         max-width: 95%;
         margin: 0 auto 10px;
@@ -227,27 +253,42 @@
           display: flex;
           .swipers_2{
             position: relative;
-            .today_dms_wrap{
-              font-size: 0;
-            }
+            display: flex;
+            background: url("/img/main/dms_wrap.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            width: 236px;
+            height: 280px; 
             .today_dms{
               font-size: 0;
               position: absolute;
-              top: calc(50% - 98px);
-              left: calc(50% - 94px);
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
             .today_dm_info_wrap{
               position: absolute;
               bottom: 0px;
               left: -4px;
-              .today_dm_box{
-                font-size: 0;
-              }
+              background: url("/img/main/dm_box.png");
+              background-repeat: no-repeat;
+              background-size: 100% 100%;
+              width: 237px;
+              height: 86px;
               .today_dm_info{
                 position: absolute;
-                top: calc(50% - 10px);
-                left: calc(50% - 100px);
+                top: 0;
+                bottom: 10px;
+                width: 95%;
+                margin: 0 auto;
+                left: 0;
+                right: 0;
                 display: flex;
+                justify-content: space-around;
                 align-items: flex-end;
                 .today_dm_face{
                   font-size: 0;
@@ -259,8 +300,8 @@
                   display: flex;
                   align-items: center;
                   position: relative;
-                  bottom: 40px;
-                  left:5px;
+                  bottom:40px;
+                  left:0;
                   .today_dm_info_icon{
                     font-size: 0;
                     img{
@@ -274,6 +315,306 @@
                 }
                 p{
                   font-size: 18px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width:639px){
+  .main_wrap{
+    width: 100%;
+    .bg{
+      .logo_nick{
+        .logo{
+          img{
+            width:90%;
+          }
+        }
+        .logo_nick_wrap{
+          width:300px;
+          .nick_txt{
+            width: 85%;
+            .nick_wrap{
+              display: flex;
+              align-items: flex-end;
+              span{
+                font-size: 16px;
+                margin-top: 10px;
+              }
+            }
+            span{
+              font-size: 14px;
+              margin-top: 10px;
+            }
+            figure{
+              margin-top:0px;
+              width: 20%;
+              img{
+                width: 100%;
+              }
+            }
+          }
+        }
+      }
+      .search_input{
+        max-width: 95%;
+        margin: 0 auto 30px;
+        position: relative;
+        background-image: url("/img/main/search.png");
+        width: 100%;
+        height: 90px;
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        .input{
+          display: flex;
+          position: absolute;
+          top: 0px;
+          bottom: 0px;
+          left: 0px;
+          width: 100%;
+          justify-content: space-around;
+          align-items: center;
+          padding: 0 20px;
+          input{
+            font-size: 14px;
+          }
+          figure{
+            margin-left: 0px;
+            text-align: right;
+            img{
+              width: 70%;
+            }
+          }
+        }
+      }
+      .random_wrap{
+        margin: 0 auto 30px;
+        .random_img{
+          img{
+            width: 45%;
+          }
+        }
+        .random_digimon_wrap{
+          padding-left: 15px;
+          .myswiper{
+            display: flex;
+            .swipers{
+              .swipers_1{
+                background-size: contain;
+                margin: 0 auto 5px;
+              }
+              .random_digimon{
+                font-size: 0;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                text-align: center;
+                display: flex;
+                opacity: 0.5;
+                justify-content: center;
+                align-items: center;
+                width: 70%;
+                margin: 0 auto;
+                img{
+                  width: 110px;
+                }
+              }
+              .random_digimon_box_wrap{
+                position: relative;
+                background: url("/img/main/random_box.png");
+                width: 156px;
+                margin: 0 auto;
+                height: 46px;
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+                p{
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
+      .today_wrap{
+        max-width: 95%;
+        margin: 0 auto 50px;
+        .today_img{
+          img{
+            width: 45%;
+          }
+        }
+        .today_text_wrap{
+          bottom: 20px;
+          background-size: contain;
+          width:100%;
+          .today_ab{
+            display: flex;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 85%;
+            margin: 0 auto;
+            .today_ab_left{
+              position: relative;
+              display: inline-block;
+              display: flex;
+              align-items: center;
+              figure{
+                font-size: 0;
+              }
+              .today_ab_left_wrap{
+                position: absolute;
+                top: calc(50% - 56px);
+                left: calc(50% - 52px);
+              }
+            }
+            .todya_ab_right{
+              .todya_ab_right1{
+                position: relative;
+                margin-bottom: 20px;
+                .today_ab_boxs{
+                  font-size: 0;
+                }
+                p{
+                  position: absolute;
+                  top:15px;
+                  right: 80px;
+                  color:#092B4F;
+                  text-shadow: 2px 2px 0px #1F93FF;
+                  font-size: 18px;
+                }
+              }
+              .todya_ab_right2{
+                margin-bottom: 20px;
+                position: relative;
+                &:last-child{
+                  margin-bottom: 0;
+                }
+                .todya_ab_right2_box{
+                  font-size: 0;
+                }
+                .todya_ab_right2_txt{
+                  display: flex;
+                  align-items: center;
+                  position: absolute;
+                  top: calc(50% - 12px);
+                  left: calc(50% - 168px);
+                  span{
+                    &:nth-of-type(1){
+                      font-size: 18px;
+                      margin-right: 30px;
+                    }
+                    &:nth-of-type(2){
+                      font-size: 14px;
+                    }
+                  }
+                  figure{
+                    font-size: 0;
+                    img{
+                      width:14px;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .today_dm_wrap{
+        padding-bottom: 150px;
+        .today_dm_imgs{
+          max-width: 95%;
+          margin: 0 auto 10px;
+          display: flex;
+          align-items: flex-end;
+          justify-content: space-between;
+          .today_dm_img{
+            font-size: 0;
+            img{
+              width: 68%;
+            }
+          }
+          .today_dm_img2{
+            text-align: right;
+            img{
+              width: 75%;
+            }
+          }
+        }
+        .today_dm{
+          padding-left: 15px; 
+          .myswiper2{
+            display: flex;
+            .swipers_2{
+              background-size: contain;
+              .today_dms{
+                font-size: 0;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                img{
+                  width: 80%;
+                }
+              }
+              .today_dm_info_wrap{
+                position: absolute;
+                bottom: 0px;
+                left: -4px;
+                background: url("/img/main/dm_box.png");
+                background-repeat: no-repeat;
+                background-size: contain;
+                width: 100%;
+                height: 86px;
+                .today_dm_info{
+                  position: absolute;
+                  top: 0;
+                  bottom: 10px;
+                  width: 95%;
+                  margin: 0 auto;
+                  left: 0;
+                  right: 0;
+                  display: flex;
+                  justify-content: space-around;
+                  align-items: flex-end;
+                  .today_dm_face{
+                    font-size: 0;
+                    img{
+                      width:40px;
+                    }
+                  }
+                  .today_dm_infos{
+                    display: flex;
+                    align-items: center;
+                    position: relative;
+                    bottom:40px;
+                    left:0;
+                    .today_dm_info_icon{
+                      font-size: 0;
+                      img{
+                        width:16px;
+                      }
+                    }
+                    span{
+                      text-shadow: 2px 2px 0px #1F93FF;
+                      font-size:18px;
+                    }
+                  }
+                  p{
+                    font-size: 18px;
+                  }
                 }
               }
             }
