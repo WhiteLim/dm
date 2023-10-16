@@ -2,18 +2,28 @@
 import React, { useEffect, useRef, useState } from 'react'
 import main from './main.module.scss'
 import Footer from '@/app/comp/Footer';
+import {user_get} from '../../comp/member/Login'
+
 
 export default function page() {
   const input = useRef();
+  const [member,setMember] = useState();
   
-  useEffect(()=>{
-    input.current.focus();
+  async function fetchData() {
+    const mb = await user_get()
+    setMember(mb);
+  }
+  
+
+  useEffect( ()=>{
+    fetchData()
   },[]);
 
   const searchBtn =  ()=>{
     console.log(123)
   };
 
+  if(!member) return <></>
   return (
     <div className={main.main_wrap}>
       <div className={main.bg}>
@@ -23,9 +33,9 @@ export default function page() {
             <figure className={main.nick_wrap}><img src='/img/main/nick_wrap.png' alt=''/></figure>
             <div className={main.nick_txt}>
               <span>[RK.1]</span>
-              <figure><img src='/img/main/icon/1.png' alt=''/></figure>
-              <span>행복포키</span>
-              <figure><img src='/img/main/face/1.png' alt=''/></figure>
+              <figure><img src={`/img/main/icon/${member.mb_icon}.png`} alt=''/></figure>
+              <span>{member.mb_nick}</span>
+              <figure><img src={`/img/main/face/${member.mb_img}.png`} alt=''/></figure>
             </div>
           </div>
         </div>

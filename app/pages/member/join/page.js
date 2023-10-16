@@ -2,12 +2,12 @@
 import React, { useEffect,  useState } from 'react'
 import join from './join.module.scss'
 import Join1 from '@/app/comp/member/join/Join1';
-import Join2 from '@/app/comp/member/join/Join2';
 import Join3 from '@/app/comp/member/join/Join3';
 import Join4 from '@/app/comp/member/join/Join4';
 import Join5 from '@/app/comp/member/join/Join5';
 import Join6 from '@/app/comp/member/join/Join6';
 import Write from '@/app/comp/member/join/Write';
+import Join2 from '@/app/comp/member/join/Join2';
 
 export default function page() {
   let [test,setTest] = useState(1)
@@ -42,7 +42,7 @@ export default function page() {
             <Join1 list={list} setList={setList} /> 
             : 
             test == 2 ? 
-            <Join2 list={list} setList={setList} setNickName={setNickName} setUimg={setUimg}/> 
+            <Join2 list={list} setList={setList} setNickName={setNickName} setUimg={setUimg} />
             : 
             test == 3 ?
             <Join3 list={list} setList={setList}  nickName={nickName}/> 

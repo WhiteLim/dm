@@ -19,7 +19,7 @@ export default function Join2({setList,setNickName,setUimg}) {
   let winHeight = useRef();
   useEffect(()=>{
     input.current.focus();
-    let h = window.outerHeight + 110;
+    let h = window.innerHeight + 110;
     winHeight.current.style.setProperty('height', `${h}px`);
   },[])
 
