@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useRef, useState } from 'react'
+import {user_get} from '../../comp/member/Login'
 import main from './main.module.scss'
 
 // Import Swiper React components
@@ -12,18 +13,28 @@ import 'swiper/css/pagination';
 
 // import required modules
 import { Pagination } from 'swiper/modules';
+import Footer from '@/app/comp/Footer';
 
 
 export default function page() {
   const input = useRef();
+
+const [member,setMember] = useState();
+async function fetchData() {
+    const mb = await user_get()
+    setMember(mb);
+  }
   
   useEffect(()=>{
-    input.current.focus();
+    //input.current.focus();
+    fetchData()
   },[]);
 
   const searchBtn =  ()=>{
     console.log(123)
   };
+
+  if(!member) return <></>
 
   return (
     <div className={main.main_wrap}>
@@ -34,9 +45,9 @@ export default function page() {
             <figure className={main.nick_wrap}><img src='/img/main/nick_wrap.png' alt=''/></figure>
             <div className={main.nick_txt}>
               <span>[RK.1]</span>
-              <figure><img src='/img/main/icon/1.png' alt=''/></figure>
-              <span>행복포키포키</span>
-              <figure><img src='/img/main/face/1.png' alt=''/></figure>
+              <figure><img src={`/img/main/icon/${member.mb_icon}.png`} alt=''/></figure>
+              <span>{member.mb_nick}</span>
+              <figure><img src={`/img/main/face/${member.mb_img}.png`} alt=''/></figure>
             </div>
           </div>
         </div>
@@ -211,6 +222,7 @@ export default function page() {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }
