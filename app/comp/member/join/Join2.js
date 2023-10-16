@@ -59,12 +59,6 @@ export default function Join2({setList,setNickName,setUimg}) {
   let winHeight = useRef();
   let btnh = useRef();
 
-  useEffect(()=>{
-    setTimeout(() => {
-          let h = window.innerHeight + btnh.current.clientHeight;
-          winHeight.current.style.setProperty('height', `${h}px`);
-        },100);
-  },[])
   
   return (
     <div className={join.join_wrap} ref={winHeight}>
