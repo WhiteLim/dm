@@ -10,9 +10,8 @@ export default function Join1({list,setList}) {
   };
 
 
-
   return (
-    <div className={join.join_wrap}  >
+    <div className={join.join_wrap} ref={winHeight} >
       <video autoPlay muted loop playsInline src='/img/background.mp4'/>
       <div className={join.bg}>
         <div className={join.join_con1_wrap} ref={con1_wrap}>
