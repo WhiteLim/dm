@@ -10,8 +10,8 @@ import Join6 from '@/app/comp/member/join/Join6';
 import Write from '@/app/comp/member/join/Write';
 
 export default function page() {
-  let [test,setTest] = useState(5)
-  let [list,setList] = useState(5)
+  let [test,setTest] = useState(1)
+  let [list,setList] = useState(1)
 
   /* 회원정보 */
   let [mb_id,setMb_id] = useState();
