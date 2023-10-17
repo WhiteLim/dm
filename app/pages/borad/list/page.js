@@ -7,14 +7,14 @@ import Footer from '@/app/comp/Footer';
 import LoginCheck from '@/app/comp/LoginCheck';
 
 export default function page() {  
-  //로그인 멤버 정보
   const [member,setMember] = useState();
-  
-  //로그인 멤버 정보
+  const [rk,setRk] = useState();
   async function fetchData() {
-    const mb = await user_get();
-    setMember(mb)
+      const mb = await user_get()
+      setRk(mb.rk.data)
+      setMember(mb.data);
   }
+    
   useEffect(()=>{
     fetchData();
   },[])
@@ -39,7 +39,7 @@ export default function page() {
         <div className={style.profile}>
           <img className={style.pfDecoBox} src='/img/board/write/profilebox.png'/>
           <div className={style.pfInner}>
-            <p>[Rk.<span>{member.mb_rank}</span>]</p>
+            <p>[Rk.{rk}]</p>
             <figure className={style.pfNickname}>
               <img src={`/img/main/icon/${member.mb_icon}.png`}/>
               <figcaption>{member.mb_nick}</figcaption>

@@ -14,16 +14,19 @@ import 'swiper/css/pagination';
 // import required modules
 import { Pagination } from 'swiper/modules';
 import Footer from '@/app/comp/Footer';
+import { useRouter } from 'next/navigation';
 
 
 export default function page() {
   const input = useRef();
 
 const [member,setMember] = useState();
+const [rk,setRk] = useState();
 async function fetchData() {
     const mb = await user_get()
-    setMember(mb);
-  }
+    setRk(mb.rk.data)
+    setMember(mb.data);
+}
   
   useEffect(()=>{
     //input.current.focus();
@@ -34,6 +37,12 @@ async function fetchData() {
     console.log(123)
   };
 
+  const mypage = useRouter();
+
+  const mypage_go = ()=>{
+    mypage.push('./member/mypage')
+  }
+
   if(!member) return <></>
 
   return (
@@ -41,9 +50,9 @@ async function fetchData() {
       <div className={main.bg}>
         <div className={main.logo_nick}>
           <figure className={main.logo}><img src='/img/main/logo.png' alt='로고 이미지'/></figure>
-          <div className={main.logo_nick_wrap}>
+          <div className={main.logo_nick_wrap} onClick={mypage_go}>
             <div className={main.nick_txt}>
-              <span>[RK.1]</span>
+              <span>[RK.{rk}]</span>
               <div className={main.nick_wrap}>
                 <figure><img src={`/img/main/icon/${member.mb_icon}.png`} alt=''/></figure>
                 <span>{member.mb_nick}</span>
