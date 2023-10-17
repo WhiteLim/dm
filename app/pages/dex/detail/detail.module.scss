@@ -8,20 +8,28 @@
     background-color: black;
     position: relative;
     margin: 0 auto;
-    background: url('/img/member/join/bg_.png') no-repeat;
+    background: url("/img/member/join/bg_.png") no-repeat;
     background-size: cover;
     mix-blend-mode: lighten;
     .detail_page {
-        padding:50px 0 150px;  
+        padding: 50px 0 150px;
         .user_info {
+            width: 580px;
+            margin: 0 auto;
             display: flex;
             align-items: center;
             justify-content: space-around;
+            p {
+                width: 135px;
+                img {
+                }
+            }
             .info_box {
                 width: 417px;
                 height: 119px;
                 background-image: url("/img/detail/info_box.png");
                 background-repeat: no-repeat;
+                background-size: 417px 119px;
                 position: relative;
                 .inner_box {
                     width: 300px;
@@ -49,6 +57,7 @@
                             margin: 4px 0;
                         }
                         p {
+                            width: 150px;
                             margin: 0;
                             font-size: 24px;
                             text-shadow: 2px 1px 0 #1f93ff;
@@ -57,12 +66,14 @@
                 }
                 .user_profile {
                     position: absolute;
-                    right: 30px;
-                    top: 20px;
+                    right: 29px;
+                    top: 18px;
                     > p {
+                        width: 70px;
+                        height: 70px;
                         img {
-                            width: 70px;
-                            height: 70px;
+                            width: 68px;
+                            height: 68px;
                         }
                     }
                 }
@@ -70,22 +81,31 @@
         }
         .dg_info {
             width: 580px;
-            height: 580px;
-            margin: 36px auto;
+            height: 630px;
+            margin: 20px auto;
             background-image: url("/img/detail/dg_detail.png");
             background-repeat: no-repeat;
             h3 {
+                width: 230px;
                 padding: 24px 0 20px;
-                margin: 0;
+                margin: 0 auto;
                 color: #00f3ff;
                 letter-spacing: 2px;
                 text-align: center;
                 text-shadow: 2px 1px 0 #1f93ff;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+                -webkit-line-clamp: 1;
+                -webkit-box-orient: vertical;
+                word-wrap: break-word;
+                word-break: keep-all;
             }
             .dg_data {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;
+                padding: 20px 0;
                 .left_data {
                     transform: translateX(20px);
                     .like {
@@ -172,30 +192,103 @@
                         height: 90px;
                         position: relative;
                         background-image: url("/img/detail/dg_info.png");
-                        background-size: contain;
+                        background-size: 280px 90px;
                         background-repeat: no-repeat;
+                        &:nth-of-type(1) {
+                            width: 280px;
+                            height: 102px;
+                            position: relative;
+                            background-image: url("/img/detail/dg_info_big.png");
+                            background-size: 280px 102px;
+                            background-repeat: no-repeat;
+                            p {
+                                position: absolute;
+                                top: 12px;
+                                left: 86px;
+                                height: 24px;
+                                letter-spacing: 2px;
+                                color: #092b4f;
+                                text-shadow: 2px 1px 0 #1f93ff;
+                            }
+                            > div {
+                                position: absolute;
+                                left: 106px;
+                                top: 36px;
+                                width: 130px;
+                                height: 24px;
+                                display: flex;
+                                flex-wrap: wrap;
+                                align-items: center;
+                                justify-content: space-between;
+                                span {
+                                    height: 24px;
+                                    letter-spacing: 2px;
+                                    text-shadow: 2px 1px 0 #1f93ff;
+                                }
+                            }
+                        }
+                        &:nth-of-type(2) {
+                            width: 280px;
+                            height: 102px;
+                            position: relative;
+                            background-image: url("/img/detail/dg_info_big.png");
+                            background-size: 280px 102px;
+                            background-repeat: no-repeat;
+                            p {
+                                position: absolute;
+                                top: 13px;
+                                left: 86px;
+                                height: 24px;
+                                letter-spacing: 2px;
+                                color: #092b4f;
+                                text-shadow: 2px 1px 0 #1f93ff;
+                            }
+                            > div {
+                                position: absolute;
+                                left: 106px;
+                                top: 36px;
+                                width: 130px;
+                                height: 24px;
+                                display: flex;
+                                flex-wrap: wrap;
+                                align-items: center;
+                                justify-content: space-between;
+                                span {
+                                    height: 24px;
+                                    letter-spacing: 2px;
+                                    text-shadow: 2px 1px 0 #1f93ff;
+                                }
+                            }
+                        }
                         p {
                             position: absolute;
                             top: 22px;
                             left: 86px;
-                            height: 30px;
+                            height: 24px;
                             letter-spacing: 2px;
                             color: #092b4f;
                             text-shadow: 2px 1px 0 #1f93ff;
                         }
-                        span {
+                        > div {
                             position: absolute;
                             left: 106px;
-                            bottom: 16px;
+                            top: 42px;
+                            width: 200px;
                             height: 30px;
-                            letter-spacing: 2px;
-                            text-shadow: 2px 1px 0 #1f93ff;
+                            display: flex;
+                            align-items: center;
+                            justify-content: space-between;
+                            span {
+                                height: 24px;
+                                letter-spacing: 2px;
+                                text-shadow: 2px 1px 0 #1f93ff;
+                            }
                         }
                     }
                 }
             }
             .description {
-                padding: 34px 0;
+                padding: 20px 0;
                 width: 580px;
                 display: flex;
                 align-items: flex-end;
@@ -216,13 +309,30 @@
                     cursor: pointer;
                 }
                 .description_more {
-                    width: 20px;
+                    p {
+                        width: 16px;
+                        height: 24px;
+                        img {
+                            width: 10px;
+                            height: 14px;
+                        }
+                    }
+                    animation: more 0.8s infinite linear;
+                }
+                @keyframes more {
+                    0%,
+                    100% {
+                        transform: translateX(0px);
+                    }
+                    50% {
+                        transform: translateX(4px);
+                    }
                 }
             }
             .get_btn {
+                padding: 24px 0;
                 p {
                     width: 220px;
-                    padding: 10px 0;
                     margin: 0 auto;
                     color: #092b4f;
                     letter-spacing: 2px;
@@ -233,6 +343,34 @@
                 }
             }
         }
+        .skill_more {
+            margin: 0 auto;
+            width: 580px;
+            height: 38px;
+            display: block;
+            position: relative;
+            > p {
+                position: absolute;
+                right: 0;
+                width: fit-content;
+                padding: 10px 0;
+                color: #00f3ff;
+                font-size: 20px;
+                text-shadow: 2px 1px 0 #1f93ff;
+                cursor: pointer;
+                &::after {
+                    content: "";
+                    width: 16px;
+                    height: 14px;
+                    margin: 0 10px;
+                    display: inline-block;
+                    vertical-align: middle;
+                    background-image: url("/img/detail/more.png");
+                    background-repeat: no-repeat;
+                    background-size: 10px 14px;
+                }
+            }
+        }
         .skill_info {
             width: 580px;
             height: 280px;
@@ -240,50 +378,52 @@
             background-image: url("/img/detail/skill_info.png");
             background-repeat: no-repeat;
             position: relative;
-            .skill_gif {
-                text-align: center;
-                padding: 58px 0;
-                p {
-                    transform: translateX(-4px);
-                    img {
-                        width: 130px;
-                        height: 130px;
+            .skill {
+                .skill_gif {
+                    text-align: center;
+                    padding: 58px 0;
+                    p {
+                        transform: translateX(-4px);
+                        img {
+                            width: 130px;
+                            height: 130px;
+                        }
+                    }
+                    span {
+                        padding: 8px 10px;
+                        color: #092b4f;
+                        text-shadow: 2px 1px 0 #1f93ff;
+                        letter-spacing: 4px;
+                        font-size: 20px;
                     }
                 }
-                span {
-                    padding: 8px 10px;
-                    color: #092b4f;
-                    text-shadow: 2px 1px 0 #1f93ff;
-                    letter-spacing: 4px;
-                    font-size: 20px;
-                }
-            }
-            .skill_txt {
-                p {
-                    width: 100px;
-                    font-size: 20px;
-                    text-shadow: 2px 1px 0 #1f93ff;
-                    &:nth-of-type(1) {
-                        position: absolute;
-                        text-align: right;
-                        left: 40px;
-                        top: 70px;
-                    }
-                    &:nth-of-type(2) {
-                        position: absolute;
-                        right: 50px;
-                        top: 70px;
-                    }
-                    &:nth-of-type(3) {
-                        position: absolute;
-                        text-align: right;
-                        left: 40px;
-                        bottom: 70px;
-                    }
-                    &:nth-of-type(4) {
-                        position: absolute;
-                        right: 50px;
-                        bottom: 70px;
+                .skill_txt {
+                    p {
+                        width: 120px;
+                        font-size: 20px;
+                        text-shadow: 2px 1px 0 #1f93ff;
+                        &:nth-of-type(1) {
+                            position: absolute;
+                            text-align: right;
+                            left: 30px;
+                            top: 70px;
+                        }
+                        &:nth-of-type(2) {
+                            position: absolute;
+                            right: 30px;
+                            top: 70px;
+                        }
+                        &:nth-of-type(3) {
+                            position: absolute;
+                            text-align: right;
+                            left: 30px;
+                            bottom: 70px;
+                        }
+                        &:nth-of-type(4) {
+                            position: absolute;
+                            right: 30px;
+                            bottom: 70px;
+                        }
                     }
                 }
             }
@@ -317,17 +457,17 @@
                     height: 70px;
                     background-image: url("/img/detail/user_review.png");
                     background-repeat: no-repeat;
-                    background-size: contain;
-                    padding: 22px 0;
+                    background-size: 520px 70px;
+                    padding: 22px 20px;
                     margin-right: 8px;
                     > div {
-                        width: 490px;
-                        margin: 0 auto;
+                        width: 460px;
+                        padding-left: 14px;
                         display: flex;
                         align-items: center;
                         justify-content: space-between;
                         .review_text {
-                            width: 300px;
+                            width: 280px;
                             text-overflow: ellipsis;
                             overflow: hidden;
                             display: -webkit-box;
@@ -339,7 +479,8 @@
                             font-family: "Noto Sans KR";
                         }
                         div {
-                            width: 34%;
+                            width: 36%;
+                            padding: 4px 0 0;
                             display: flex;
                             align-items: center;
                             justify-content: space-between;
@@ -443,21 +584,20 @@
                         top: 30px;
                     }
                 }
-                ul {
-                    display: flex;
-                    flex-wrap: wrap;
+                .list_box {
+                    width: 100%;
                     .Evolution_list {
+                        margin: 0 auto;
                         padding: 16px 0;
                         .Evolution_data {
-                            width: 140px;
-                            margin: 0 26px;
+                            margin: 0 12px;
+                            width: 100%;
                             .picture {
                                 position: relative;
-                                width: 136px;
-                                height: 168px;
-                                img {
-                                    opacity: 70%;
-                                }
+                                height: 178px;
+                                width: 100%;
+                                background-image: url("/img/detail/digi_box.png");
+                                background-repeat: no-repeat;
                                 .digimon {
                                     position: absolute;
                                     left: 24px;
@@ -480,9 +620,10 @@
                             .digi_name {
                                 position: relative;
                                 transform: translateX(-10px);
-                                img {
-                                    width: 150px;
-                                }
+                                background-image: url("/img/detail/name_box.png");
+                                background-repeat: no-repeat;
+                                width: 200px;
+                                height: 80px;
                                 span {
                                     position: absolute;
                                     text-align: center;
@@ -517,21 +658,20 @@
                         top: 30px;
                     }
                 }
-                ul {
-                    display: flex;
-                    flex-wrap: wrap;
+                .list_box {
+                    width: 100%;
                     .Evolution_list {
+                        margin: 0 auto;
                         padding: 16px 0;
                         .Evolution_data {
-                            width: 140px;
-                            margin: 0 26px;
+                            margin: 0 12px;
+                            width: 100%;
                             .picture {
                                 position: relative;
-                                width: 136px;
-                                height: 168px;
-                                img {
-                                    opacity: 70%;
-                                }
+                                height: 178px;
+                                width: 100%;
+                                background-image: url("/img/detail/digi_box.png");
+                                background-repeat: no-repeat;
                                 .digimon {
                                     position: absolute;
                                     left: 24px;
@@ -554,9 +694,10 @@
                             .digi_name {
                                 position: relative;
                                 transform: translateX(-10px);
-                                img {
-                                    width: 150px;
-                                }
+                                background-image: url("/img/detail/name_box.png");
+                                background-repeat: no-repeat;
+                                width: 200px;
+                                height: 80px;
                                 span {
                                     position: absolute;
                                     text-align: center;
@@ -570,6 +711,7 @@
                                     -webkit-line-clamp: 1;
                                     -webkit-box-orient: vertical;
                                     word-wrap: break-all;
+                                    word-break: keep-all;
                                     text-shadow: 2px 1px 0 #1f93ff;
                                 }
                             }
