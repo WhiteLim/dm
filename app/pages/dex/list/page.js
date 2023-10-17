@@ -33,7 +33,7 @@ export default function Page() {
 
     const getContents = async () => {
         try {
-            const requests = urls.map((url) => axios.get(url))
+            const requests = urls.map((url) => Axios.get(url))
             const responses = await axios.all(requests);
             const _data = responses.reduce((acc, resp) => {
                 if (resp.data.content) {

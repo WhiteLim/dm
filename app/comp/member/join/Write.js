@@ -7,7 +7,7 @@ export default function Write({userData}) {
     const n = useRouter()
     useEffect(()=>{
         axios.post('/api/member/join',userData)
-        localStorage.setItem('loginstate',userData.mb_id)
+        sessionStorage.setItem('loginstate',userData.mb_id)
         n.push('../main')
     },[])
 

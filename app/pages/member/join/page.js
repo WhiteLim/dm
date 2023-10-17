@@ -31,7 +31,7 @@ export default function page() {
     const d = date.getDate();
     const toDay = `${y}.${m}.${d}`;
 
-    let userData = {mb_id,nickName,uimg,cc,toDay,count:0}
+    let userData = {mb_id,nickName,uimg,cc,toDay}
     setUserData(userData)
   },[list])
   

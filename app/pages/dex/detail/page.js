@@ -10,7 +10,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
 import Link from 'next/link'
-import {user_get} from '../../../comp/member/Login'
+import { user_get } from '../../../comp/member/Login'
 import { useRouter } from 'next/navigation'
 
 export default function page() {
@@ -21,18 +21,18 @@ export default function page() {
     const [reviewText, setReviewText] = useState([])
     const params = useSearchParams();
     const idParam = params.get('id');
-    const [member,setMember] = useState();
-    const [rk,setRk] = useState();
+    const [member, setMember] = useState();
+    const [rk, setRk] = useState();
     const nav = useRouter();
     async function fetchData() {
         const mb = await user_get()
         setRk(mb.rk.data)
         setMember(mb.data);
-     }
-    
-    useEffect( ()=>{
+    }
+
+    useEffect(() => {
         fetchData()
-      },[]);
+    }, []);
 
 
 
@@ -80,9 +80,9 @@ export default function page() {
         detailData()
     }, [idParam])
 
-    const moving = (link)=>{
+    const moving = (link) => {
         nav.push(link)
-      }
+    }
 
     const handleImgError = (e) => {
         e.target.src = 'https://digimon-api.com/images/digimon/w/Earthdramon.png';
@@ -101,12 +101,12 @@ export default function page() {
                         <div className={de.inner_box}>
                             <span>[Rk.{rk}]</span>
                             <div>
-                                <img src={`/img/main/icon/${member.mb_icon}.png`} alt=''/>
+                                <img src={`/img/main/icon/${member.mb_icon}.png`} alt='' />
                                 <p>{member.mb_nick}</p>
                             </div>
                         </div>
                         <div className={de.user_profile}>
-                            <p onClick={()=>{ moving('/pages/member/mypage') }}><img src={`/img/main/face/${member.mb_img}.png`} alt=''/></p>
+                            <p onClick={() => { moving('/pages/member/mypage') }}><img src={`/img/main/face/${member.mb_img}.png`} alt='' /></p>
                         </div>
                     </div>
                 </div>
@@ -163,7 +163,7 @@ export default function page() {
                     <div className={de.description}>
                         <p className={de.description_txt} onClick={clickModal} >
                             {
-                                data.descriptions.filter(n=> n.language == 'en_us').map((v)=>(
+                                data.descriptions.filter(n => n.language == 'en_us').map((v) => (
                                     v.description
                                 ))
                             }
@@ -259,26 +259,28 @@ export default function page() {
                                 data.priorEvolutions.map((priorEvolutions, key_5) => (
                                     <SwiperSlide key={key_5}>
                                         <div className={de.list_box}>
-                                            <Link href={{
-                                                pathname: '../dex/detail',
-                                                query: {
-                                                    id: priorEvolutions.id,
-                                                }
-                                            }} className={de.Evolution_list}>
-                                                <div className={de.Evolution_data}>
-                                                    <div className={de.picture}>
-                                                        <div className={de.digimon}>
-                                                            <img src={priorEvolutions.image}  onError={handleImgError} className={de.digi_picture} />
-                                                            <p>
-                                                                <img src={'/img/detail/mask.png'} className={de.mask} />
-                                                            </p>
+                                            {priorEvolutions.id ? (
+                                                <Link href={{
+                                                    pathname: '../dex/detail',
+                                                    query: {
+                                                        id: priorEvolutions.id,
+                                                    }
+                                                }} className={de.Evolution_list}>
+                                                    <div className={de.Evolution_data}>
+                                                        <div className={de.picture}>
+                                                            <div className={de.digimon}>
+                                                                <img src={priorEvolutions.image} onError={handleImgError} className={de.digi_picture} />
+                                                                <p>
+                                                                    <img src={'/img/detail/mask.png'} className={de.mask} />
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className={de.digi_name}>
+                                                            <span>{priorEvolutions.digimon}</span>
                                                         </div>
                                                     </div>
-                                                    <div className={de.digi_name}>
-                                                        <span>{priorEvolutions.digimon}</span>
-                                                    </div>
-                                                </div>
-                                            </Link>
+                                                </Link>
+                                            ) : (alert('볼 수 없다구'))}
                                         </div>
                                     </SwiperSlide>
                                 ))
@@ -318,7 +320,7 @@ export default function page() {
                                 data.nextEvolutions.map((nextEvolutions, key_6) => (
                                     <SwiperSlide key={key_6}>
                                         <div className={de.list_box}>
-                                        <Link href={{
+                                            <Link href={{
                                                 pathname: '../dex/detail',
                                                 query: {
                                                     id: nextEvolutions.id,
