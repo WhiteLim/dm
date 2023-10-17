@@ -38,12 +38,16 @@
           display: flex;
           align-items: center;
           justify-content: space-evenly;
+          span {
+            font-family: 'neodgm_code';
+          }
           .nick_wrap{
             display: flex;
             align-items: flex-end;
             span{
               font-size: 24px;
               margin-right: 15px;
+              font-family: 'neodgm_code';
             }
           }
           span{

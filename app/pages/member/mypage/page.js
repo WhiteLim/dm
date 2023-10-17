@@ -1,44 +1,103 @@
 "use client"
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import style from './page.module.scss'
 import Footer from '@/app/comp/Footer'
-
+import {user_get} from '../../../comp/member/Login'
+import axios from 'axios'
 
 
 export default function page() {
 
-  const fig = useRef();
+  const fig = useRef();  const imgChange = useRef();
   const [num, setNum] = useState(0);
 
-  useEffect(() => {
-    const button = fig.current.childNodes;
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const [member,setMember] = useState();
+  const [rk,setRk] = useState();
+  async function fetchData() {
+      const mb = await user_get()
+      setRk(mb.rk.data)
+      setMember(mb.data);
+  }
+
+  useEffect( ()=>{
+    fetchData()
+  },[]);
+  
+  //캡슐 불 키고 끄고
+  
+
+  useEffect(() => {
+    const button = fig.current.childNodes
+      
     button.forEach((v, k) => {
+      if(k+1 == member?.mb_icon){
+        button[k].childNodes[0].style.opacity = 1
+      }
+      
       v.onclick = () => {
         button[num].childNodes[0].style.opacity = 0.6
         v.childNodes[0].style.opacity = 1
         setNum(k)
         if (num == k) {
-          console.log('변경불가');
+         alert("같은 캡슐로 변경은 불가능합니다.")
         } else {
-          console.log('저장', k + 1);
+          const send = {id:member?.mb_id,cc:k+1}
+          axios.post('/api/member/mypage/cc',send)
+          fetchData();
+          alert("변경완료");
+          location.reload();
         }
       }
     });
-  })
+
+  },[num,member])
 
 
-  const modal = useRef();
-  const openPage = useRef();
+  //모달페이지 이미지 선택
+  useEffect(()=>{
+    if(isModalOpen){
+      const imgChangeNode = imgChange.current.childNodes;
+      imgChangeNode.forEach((a, b) =>{
+        if(b+1 == member.mb_img){
+          a.childNodes[0].style.opacity = 1;
+        }
+        a.addEventListener('click' , () =>{
+          let send = {id:member.mb_id,img:b+1}
+          axios.post('/api/member/mypage/face',send)
+          fetchData()
+        })
+      })
 
-  useEffect(() => {
-    const open = modal.current.childNodes[0];
-    const select = openPage.current.childNodes[1];
-    console.log(open)
-    // onclick 이벤트 넣어주기
-  })
+    }
+  },[isModalOpen])
+
+  const nickchang = (e)=>{
+    e.preventDefault();
+    const mb_nick = e.target.mb_nick.value;
+    const nickLangth = mb_nick.split("");
+
+    if(nickLangth.length < 2 || nickLangth.length > 6) {
+      alert("닉네임은 2~6글자로 만들어주세요!");
+    } else {
+      const send = {id:member.mb_id,nick:mb_nick}
+      axios.post('/api/member/mypage/nick',send)
+      fetchData()
+      e.target.mb_nick.blur()
+      alert("닉네임 변경 완료")
+    }
+  }
 
 
+  //모달페이지 열고 닫기
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   return (
     <article className={style.bg_img}>
@@ -48,42 +107,43 @@ export default function page() {
           <img src='/img/member/mypage/Group 206.png' />
         </div>
         <figure className={style.pro_view_bg}>
-          <figcaption className={style.pro_view} ref={modal}>
-            <img src='/img/member/mypage/Group 239.png' />
-            <div className={style.modal_p} ref={openPage} >
-{/*               <img src='/img/member/mypage/Group 233.png' /> */}
-              {/* 백그라운드 이미지로 넣고 position 설정해주기 */}
-              <figure>
-                <img src='/img/member/mypage/Group 737.png' />
-              </figure>
-              <figure>
-                <img src='/img/member/mypage/Group 738.png' />
-              </figure>
-              <figure>
-                <img src='/img/member/mypage/Group 739.png' />
-              </figure>
-              <figure>
-                <img src='/img/member/mypage/Group 740.png' />
-              </figure>
-              <figure>
-                <img src='/img/member/mypage/Group 741.png' />
-              </figure>
-              <figure>
-                <img src='/img/member/mypage/Group 734.png' />
-              </figure>
-              <figure>
-                <img src='/img/member/mypage/Group 736.png' />
-              </figure>
-              <figure>
-                <img src='/img/member/mypage/Group 735.png' />
-              </figure>
-            </div>
-            <p>[날짜]</p>
-            <p>[랭킹]</p>
+          <figcaption className={style.pro_view}>
+            <img src={`/img/member/mypage/faces/${member && member.mb_img}.png`} className={style.pro_img} onClick={() => openModal()} />
+            {isModalOpen && (
+              <div className={style.modal_bg} onClick={() => closeModal()}>
+                <div className={style.modal_p} ref={imgChange}>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s1.png' alt='' />
+                  </figure>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s2.png' alt='' />
+                  </figure>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s3.png' alt='' />
+                  </figure>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s4.png' alt='' />
+                  </figure>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s5.png' alt='' />
+                  </figure>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s6.png' alt='' />
+                  </figure>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s7.png' alt='' />
+                  </figure>
+                  <figure>
+                    <img src='/img/member/mypage/faces/s8.png' alt='' />
+                  </figure>
+                </div>
+              </div>)}
+            <p>[ {member && member.mb_date} ]</p>
+            <p>[ Rk. {rk} ]</p>
             <img src='/img/member/mypage/Group 759.png' className={style.pro_view_img} />
-            <form className={style.pro_view_form}>
-              <img src='/img/member/mypage/Frame 62.png' />
-              <input type='text' name='mb_nick' className={style.text_box} />
+            <form className={style.pro_view_form} onSubmit={nickchang} method='post'>
+              <img src={`/img/main/icon/${member && member.mb_icon}.png`} />
+              <input type='text' name='mb_nick' className={style.text_box} placeholder={member && member.mb_nick}/>
               <input type='submit' className={style.submit_btn} value='' />
             </form>
           </figcaption>
@@ -134,4 +194,7 @@ export default function page() {
       <Footer />
     </article>
   )
+  {
+
+  }
 }

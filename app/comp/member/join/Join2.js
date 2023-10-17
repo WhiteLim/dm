@@ -58,7 +58,12 @@ export default function Join2({setList,setNickName,setUimg}) {
 
   let winHeight = useRef();
   let btnh = useRef();
-
+  
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault();
+    }
+  });
   
   return (
     <div className={join.join_wrap} ref={winHeight}>
