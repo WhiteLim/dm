@@ -12,6 +12,7 @@ import { Pagination } from 'swiper/modules';
 import Link from 'next/link'
 import { user_get } from '../../../comp/member/Login'
 import { useRouter } from 'next/navigation'
+import Lodding from '@/app/comp/Lodding'
 
 export default function page() {
     // 모달 버튼 클릭 유무를 저장할 state
@@ -27,6 +28,7 @@ export default function page() {
     const [rk, setRk] = useState();
     const [likecnt, setLikecnt] = useState();
     const [dg, setDg] = useState();
+    const [btnname, setBtnname] = useState('포획하기');
 
     const nav = useRouter();
     async function fetchData() {
@@ -104,6 +106,9 @@ export default function page() {
         const mb_id = sessionStorage.getItem('loginstate');
         const ch = await axios.get(`/api/dex/detail/catch?dg_id=${idParam}&mb_id=${mb_id}`)
         setDg(ch.data);
+        if(ch.data == true) {
+            setBtnname('포획완료')
+        }
     }
 
     const detailData = function () {
@@ -137,6 +142,7 @@ export default function page() {
                 await axios.post(`/api/dex/detail/catch`, send)
                 setDg(true)
                 alert('나이스! 포획성공!');
+                dgch()
             } else {
                 alert('디지몬이 도망갔습니다.');
             }
@@ -145,8 +151,7 @@ export default function page() {
         }
     };
 
-    if (!data || !member) return <></>;
-
+    if (!data || !member) return <Lodding />
     return (
         <section className={de.detail} key={data.id}>
             {showModal && <Modal clickModal={clickModal} DescriptionInModal={DescriptionInModal} />}
@@ -154,8 +159,8 @@ export default function page() {
             <div className={de.detail_page}>
                 <div className={de.user_info}>
                     <p><img src={'/img/detail/logo.png'} /></p>
-                    <div className={de.info_box}>
-                        <div className={de.inner_box}>
+                    <div className={de.info_box} onClick={()=>{ moving('/pages/member/mypage') }}>
+                        <div className={de.inner_box} >
                             <span>[Rk.{rk}]</span>
                             <div>
                                 <img src={`/img/main/icon/${member.mb_icon}.png`} alt='' />
@@ -163,72 +168,85 @@ export default function page() {
                             </div>
                         </div>
                         <div className={de.user_profile}>
-                            <p onClick={() => { moving('/pages/member/mypage') }}><img src={`/img/main/face/${member.mb_img}.png`} alt='' /></p>
+                            <p ><img src={`/img/main/face/${member.mb_img}.png`} alt='' /></p>
                         </div>
                     </div>
                 </div>
                 <div className={de.dg_info}>
                     <h3>{data.name}</h3>
-                    <div className={de.dg_data}>
-                        <div className={de.left_data}>
-                            <p className={de.like} onClick={like} >
-                                <img src={'/img/detail/like_box.png'} />
-                                <img src={'/img/detail/like_1.png'} className={de.likes} />
-                                <span>{likecnt}</span>
-                            </p>
-                            <div className={de.dg_img}>
-                                <p className={de.dg_img_1}>
-                                    <img src={'/img/detail/dg_img_1.png'} />
+                    <div className={de.dg_box}>
+                        <div className={de.dg_data}>
+                            <div className={de.left_data}>
+                                <p className={de.like} onClick={like} >
+                                    <img src={'/img/detail/like_box.png'} />
+                                    <img src={'/img/detail/like_1.png'} className={de.likes} />
+                                    <span>{likecnt}</span>
                                 </p>
-                                <p className={de.sample}>
-                                    <img src={data.images[0].href} />
-                                </p>
-                                <p className={de.dg_img_2}>
-                                    <img src={'/img/detail/dg_img_2.png'} />
-                                </p>
+                                <div className={de.dg_img}>
+                                    <p className={de.dg_img_1}>
+                                        <img src={'/img/detail/dg_img_1.png'} />
+                                    </p>
+                                    <p className={de.sample}>
+                                        <img src={data.images[0].href} onError={handleImgError} alt='' />
+                                    </p>
+                                    <p className={de.dg_img_2}>
+                                        <img src={'/img/detail/dg_img_2.png'} />
+                                    </p>
+                                </div>
                             </div>
-                        </div>
-                        <ul className={de.right_data}>
-                            <li>
-                                <p>LEVEL</p>
-                                <div>
-                                    {
-                                        data.levels.map((level, key_1) => (
-                                            <span key={key_1}>{level.level}</span>
-                                        ))
-                                    }
-                                </div>
-                            </li>
-                            <li>
-                                <p>TYPE</p>
-                                <div>
-                                    {
-                                        data.types.length === 0
-                                            ? <span>none</span>
-                                            : data.types.map((type, key_2) => (
-                                                <span key={key_2}>{type.type}</span>
+                            <ul className={de.right_data}>
+                                <li>
+                                    <p>LEVEL</p>
+                                    <div>
+                                        {
+                                            data.levels.map((level, key_1) => (
+                                                <span key={key_1}>{
+                                                    level.level == 'Baby I' ? '유아기' 
+                                                    : level.level =='Baby II' ? '유년기'
+                                                    : level.level =='Child' ? '성장기'
+                                                    : level.level =='Adult' ? '성숙기'
+                                                    : level.level =='Perfect' ? '완전체'
+                                                    : level.level =='Ultimate' ? '궁극체'
+                                                    : level.level =='Super Ultimate' ? '초 궁극체'
+                                                    : level.level == 'Armor' ? '아머체'
+                                                    : level.level == 'Hybrid' ? '하이브리드'
+                                                    : level.level
+                                                    }</span>
                                             ))
-                                    }
-                                </div>
-                            </li>
-                            <li>
-                                <p>X-Antibody</p>
-                                <div>
-                                    <span>{data.xAntibody === true ? 'true' : data.xAntibody ? data.xAntibody : 'none'}</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div className={de.description} onClick={() => clickModal(data)}>
-                        <p className={de.description_txt}>
-                            {data.descriptions.find(description => description.language === 'en_us')?.description || 'The data is not available.'}
-                        </p>
-                        <div className={de.description_more}>
-                            <p><img src={'/img/detail/more.png'} /></p>
+                                        }
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>TYPE</p>
+                                    <div>
+                                        {
+                                            data.types.length === 0
+                                                ? <span>none</span>
+                                                : data.types.map((type, key_2) => (
+                                                    <span key={key_2}>{type.type}</span>
+                                                ))
+                                        }
+                                    </div>
+                                </li>
+                                <li>
+                                    <p>X-Antibody</p>
+                                    <div>
+                                        <span>{data.xAntibody === true ? 'true' : data.xAntibody ? data.xAntibody : 'none'}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div className={de.description} onClick={() => clickModal(data)}>
+                            <p className={de.description_txt}>
+                                {data.descriptions.find(description => description.language === 'en_us')?.description || 'The data is not available.'}
+                            </p>
+                            <div className={de.description_more}>
+                                <p><img src={'/img/detail/more.png'} /></p>
+                            </div>
                         </div>
                     </div>
                     <div className={de.get_btn}>
-                        <p onClick={() => performAction(data)}>포획하기</p>
+                        <p onClick={() => performAction(data)}>{btnname}</p>
                     </div>
                 </div>
                 <div className={de.skill_more}>
@@ -323,7 +341,7 @@ export default function page() {
                                                 <Link href={{
                                                     pathname: '../dex/detail',
                                                     query: {
-                                                        id: priorEvolutions.id,
+                                                        id: !priorEvolutions.id ? idParam :  priorEvolutions.id,
                                                     }
                                                 }} className={de.Evolution_list} >
                                                     {priorEvolutions.id == priorEvolutions.id ? (

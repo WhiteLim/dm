@@ -154,6 +154,10 @@
                 background-image: url("/img/detail/non_box.png");
                 background-repeat: no-repeat;
                 background-position: 50% 28%;
+                opacity: 0.5;
+                &.active {
+                    opacity: 1;
+                }
                 cursor: pointer;
                 p {
                     position: absolute;

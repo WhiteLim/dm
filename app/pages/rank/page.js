@@ -5,6 +5,7 @@ import Footer from '@/app/comp/Footer';
 import {user_get} from '../../comp/member/Login'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Lodding from '@/app/comp/Lodding';
 
 export default function page() {
   const nav = useRouter();
@@ -30,7 +31,7 @@ export default function page() {
     ranking()
   },[]);
 
-  if(!member) return <></>
+  if(!member) return <Lodding />
   
   return (
     <div className={rank.rank_wrap}>

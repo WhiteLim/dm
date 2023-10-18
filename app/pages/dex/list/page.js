@@ -1,11 +1,13 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import li from './list.module.scss';
 import axios from 'axios';
 import Footer from '@/app/comp/Footer';
 import Link from 'next/link';
 import {user_get} from '../../../comp/member/Login'
 import { useSearchParams } from 'next/navigation';
+import Lodding from '@/app/comp/Lodding';
+import { useRouter } from 'next/navigation';
 
 const baseURL = 'https://www.digi-api.com/api/v1/digimon';
 
@@ -20,6 +22,7 @@ export default function Page() {
     const [tt,setTt] = useState(false);
     const [mdg,setMdg] = useState();
     const params = useSearchParams();
+    const btn = useRef();
     let mode = params.get('mode');
     const keyword = params.get('search');
 
@@ -63,13 +66,21 @@ export default function Page() {
     const more = () => {
         setPage(page + 10);
     };
-
-    const setLevelByType = (levels) => {
-        if(mode == 'search'){ setTt(true) }
+    const [bnum, setBnum] = useState(0);
+    const setLevelByType = (levels,eq) => {
+        if(mode == 'search'){ 
+            setTt(true) 
+            btn.current.childNodes[0].classList.remove(li.active)
+            btn.current.childNodes[1].classList.remove(li.active)
+            btn.current.childNodes[2].classList.remove(li.active)
+        } else {
+            btn.current.childNodes[bnum].classList.remove(li.active)
+            btn.current.childNodes[eq].classList.add(li.active)
+        }
+        setBnum(eq)
         setLevel(levels);
         setPage(10);
     };
-
     useEffect(() => {
         if(mode == 'search' && tt ==false){
             setSearchText(keyword)
@@ -81,6 +92,9 @@ export default function Page() {
 
     function searching(e) {
         e.preventDefault();
+        btn.current.childNodes[0].classList.remove(li.active)
+        btn.current.childNodes[1].classList.remove(li.active)
+        btn.current.childNodes[2].classList.remove(li.active)
         find()
     }
 
@@ -101,16 +115,23 @@ export default function Page() {
             setData(filteredData);
         }
     }
+    const nav = useRouter();
+    const moving = (link)=>{
+        nav.push(link)
+      }
 
+      const handleImgError = (e) => {
+        e.target.src = 'https://digimon-api.com/images/digimon/w/Earthdramon.png';
+    }
 
-    if (!data || !member || !mdg) return <></>;
+    if (!data || !member || !mdg) return <Lodding />
 
     return (
         <section className={li.list_page}>
             <div className={li.user_info}>
                 <p><img src={'/img/detail/logo.png'} alt="Logo" /></p>
                 <div className={li.info_box}>
-                    <div className={li.inner_box}>
+                    <div className={li.inner_box} onClick={()=>{ moving('/pages/member/mypage') }}>
                         <span>[Rk.{rk}]</span>
                         <div>
                         <img src={`/img/main/icon/${member.mb_icon}.png`} alt=''/>
@@ -141,16 +162,16 @@ export default function Page() {
                 </div>
             </div>
             <div className={li.data_list}>
-                <div className={`${li.btn_list}${btnClicked ? '_clicked' : ''}`}>
-                    <div onClick={() => setLevelByType(['Baby I' || 'Baby II' || '' || ''])}
-                        className={li.btn}>
+                <div className={`${li.btn_list}${btnClicked ? '_clicked' : ''}`} ref={btn}>
+                    <div onClick={() => setLevelByType(['Baby I' || 'Baby II' || '' || ''],0)}
+                        className={`${li.btn} ${li.active}`}>
                         <p>유년기</p>
                     </div>
-                    <div onClick={() => setLevelByType(['Child' || 'Adult' || 'Armor' || ''])}
+                    <div onClick={() => setLevelByType(['Child' || 'Adult' || 'Armor' || ''],1)}
                         className={li.btn}>
                         <p>성장기</p>
                     </div>
-                    <div onClick={() => setLevelByType(['Perfect' || 'Ultimate' || 'Hybrid' || 'Super Ultimate'])}
+                    <div onClick={() => setLevelByType(['Perfect' || 'Ultimate' || 'Hybrid' || 'Super Ultimate'],2)}
                         className={li.btn}>
                         <p>완전체</p>
                     </div>
@@ -169,7 +190,7 @@ export default function Page() {
                                         }}className={li.picture}>
                                             <img src={'/img/detail/digi_box.png'} alt="Digi Box" />
                                             <div className={li.digimon}>
-                                                <img src={v.image} className={`${li.digi_picture} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Digimon Image" />
+                                                <img src={v.image} onError={handleImgError} className={`${li.digi_picture} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Digimon Image" />
                                                 <p>
                                                     <img src={'/img/detail/mask.png'} className={`${li.mask} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Mask" />
                                                 </p>

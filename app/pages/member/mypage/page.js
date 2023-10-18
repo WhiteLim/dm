@@ -5,6 +5,7 @@ import Footer from '@/app/comp/Footer'
 import {user_get} from '../../../comp/member/Login'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
+import Lodding from '@/app/comp/Lodding'
 
 
 export default function page() {
@@ -129,7 +130,7 @@ export default function page() {
     n.push('/pages/intro')
   }
 
-  if(!member) return <></>
+  if(!member) return <Lodding />
   return (
     <article className={style.bg_img}>
       <div className={style.pro}>

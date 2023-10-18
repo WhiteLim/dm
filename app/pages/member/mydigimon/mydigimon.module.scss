@@ -108,6 +108,18 @@
                     display: flex;
                     flex-wrap: wrap;
                     align-items: center;
+                    .nondata{
+                        display: flex;
+                        height: 100%;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        text-align: center;
+                        img {
+                            width: 50%;
+                            object-fit: cover;
+                        }
+                    }
                     .Evolution_list {
                         width: 170px;
                         margin-bottom: 20px;

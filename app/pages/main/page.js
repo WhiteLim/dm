@@ -16,6 +16,7 @@ import { Pagination } from 'swiper/modules';
 import Footer from '@/app/comp/Footer';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import Lodding from '@/app/comp/Lodding';
 
 
 export default function page() {
@@ -56,7 +57,7 @@ async function getdigimon() {
 
 const getFile = async function(){
   try {
-    const dbData = await axios.get('/api/borad/list');
+    const dbData = await axios.post('/api/borad/list');
     setDdata(dbData.data);
   } catch (error) {
     console.error("AxiosError:", error);
@@ -80,8 +81,11 @@ const getFile = async function(){
     nav.push(`/pages/dex/list?mode=search&search=${search}`);
   }
 
-  if(!member || !mdg || !lines) return <></>
+  const handleImgError = (e) => {
+    e.target.src = 'https://digimon-api.com/images/digimon/w/Earthdramon.png';
+}
 
+  if(!member || !mdg || !lines) return <Lodding />
 
   return (
     <div className={main.main_wrap}>
@@ -135,7 +139,7 @@ const getFile = async function(){
               data && data.map((v,k)=>(
                 <SwiperSlide className={`${main.swipers}`} key={k}>
                   <div className={`${main.swipers_1}  ${mdg?.some(n => n.dg_id == v.id) && main.active || main.null} `}>
-                    <figure className={main.random_digimon} onClick={()=>{ moving(`/pages/dex/detail?id=${v.id}`) }}><img src={v.image} alt={v.name} /></figure>
+                    <figure className={main.random_digimon} onClick={()=>{ moving(`/pages/dex/detail?id=${v.id}`) }}><img src={v.image} alt={v.name} onError={handleImgError} /></figure>
                   </div>
                   <div className={main.random_digimon_box_wrap}>
                     <p>{v.name.slice(0,15)}</p>
@@ -151,7 +155,7 @@ const getFile = async function(){
           <div className={main.today_text_wrap}>
               <div className={main.today_ab_left} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>
                 <figure>
-                  <img src={rdg && rdg.images[0].href} alt=''/>
+                  <img src={rdg && rdg.images[0].href} onError={handleImgError} alt=''/>
                   <figcaption>
                     <img src='/img/main/today_wrap.png' alt=''/>
                   </figcaption>

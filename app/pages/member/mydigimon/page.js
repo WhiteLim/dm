@@ -5,12 +5,15 @@ import Footer from '@/app/comp/Footer';
 import Link from 'next/link';
 import { user_get } from '../../../comp/member/Login'
 import axios from 'axios';
+import Lodding from '@/app/comp/Lodding';
+import { useRouter } from 'next/navigation';
 
 export default function page() {
     const [data, setData] = useState([]);
     const [list, setList] = useState([]);
     const [member, setMember] = useState();
     const [rk, setRk] = useState();
+    const [page, setPage] = useState(10);
 
     async function fetchData() {
         const mb = await user_get()
@@ -50,15 +53,25 @@ export default function page() {
         e.target.src = 'https://digimon-api.com/images/digimon/w/Earthdramon.png';
     }
 
+    const nav = useRouter();
+    const moving = (link)=>{
+        nav.push(link)
+    }
 
-    if (!data || !member || !list) return <></>;
+    const removedg = (id)=>{
+        const send = {mb_id:member.mb_id,dg_id:id}
+        axios.post('/api/member/mydigimon/rm',send)
+        getdigimon()
+    }
+
+    if (!data || !member || !list) return <Lodding />
 
     return (
         <div>
             <section className={my.list_page}>
                 <div className={my.user_info}>
                     <p><img src={'/img/detail/logo.png'} alt="Logo" /></p>
-                    <div className={my.info_box}>
+                    <div className={my.info_box}  onClick={()=>{ moving('/pages/member/mypage') }}>
                         <div className={my.inner_box}>
                             <span>[Rk.{rk}]</span>
                             <div>
@@ -83,7 +96,12 @@ export default function page() {
                         <div>
                             <ul>
                                 {
-                                    list && list?.slice(0, 10).map((v, k) => (
+                                    list.length <= 0 ? 
+                                    <li className={my.nondata}>
+                                        <p>Lodding...</p>
+                                        <img src="/img/intro/intro.gif" alt='' />
+                                    </li>
+                                    : list?.slice(0, page).map((v, k) => (
                                         <li className={my.Evolution_list} key={k}>
                                             <div className={my.Evolution_data}>
                                             <Link href={{ pathname: '../dex/detail', query: { id: v.id, } }} className={my.picture}>
@@ -95,6 +113,7 @@ export default function page() {
                                                 </p>
                                                 </div>
                                             </Link>
+                                            <p onClick={()=>{removedg(v.id)}}> 놓아주기 </p> {/* 링크 안에 들어가면 페이지 이동함 조심 */}
                                             <Link href={{ pathname: '../dex/detail', query: { name: v.name } }} className={my.digi_name}>
                                                 <img src={'/img/detail/name_box.png'} alt="Name Box" />
                                                 <span>{v.name}</span>
@@ -103,9 +122,14 @@ export default function page() {
                                         </li>
                                     ))
                                 }
-                                <div className={my.button}>
-                                    <span onClick={more}> 더보기 </span>
-                                </div>
+                                {
+                                  list.length > 0 && data.length > 10 ?
+                                  <div className={my.button}>
+                                      <span onClick={more}> 더보기 </span>
+                                  </div>
+                                  :
+                                  ''
+                                }
                             </ul>
                         </div>
                     </div>

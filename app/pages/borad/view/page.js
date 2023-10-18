@@ -2,10 +2,11 @@
 
 import style from './page.module.scss'
 import React, { useEffect, useRef, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import axios from 'axios';
 import {user_get} from '../../../comp/member/Login'
 import Footer from '@/app/comp/Footer';
+import Lodding from '@/app/comp/Lodding';
 
 export default function page() {
   // url에서 받아오기~~~~
@@ -136,14 +137,19 @@ export default function page() {
     }
   }
 
-  if(!member || !data || !ansData) return <></>
+  const nav = useRouter();
+  const moving = (link)=>{
+      nav.push(link)
+    }
+
+  if(!member || !data || !ansData) return <Lodding />
   return (
     <article className={style.board_view}>
       <header>
         <figure className={style.logo}><img src='/img/board/write/logo.png'/></figure>
         <div className={style.profile} >
           <img className={style.pfDecoBox} src='/img/board/write/profilebox.png'/>
-          <div className={style.pfInner}>
+          <div className={style.pfInner} onClick={()=>{ moving('/pages/member/mypage') }}>
             <p>[Rk.{rk}]</p>
             <figure className={style.pfNickname}>
               <img src={`/img/main/icon/${member.mb_icon}.png`}/>
