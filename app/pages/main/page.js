@@ -102,7 +102,7 @@ const getFile = async function(){
         <div className={main.search_input}>
           <div className={main.input}>
             <form className={main.input_form} onSubmit={ser}>
-              <input type="text" name='search' className={main.inputs} placeholder='디지몬을 검색해보세요.' ref={input}/>
+              <input type="text" name='search' pattern="[A-Za-z]+" className={main.inputs} placeholder='디지몬을 검색해보세요.(영문검색)' ref={input}/>
               <figure><input type="submit" className={main.fig_input} value="" /></figure>
             </form>
           </div>
