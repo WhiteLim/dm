@@ -37,8 +37,10 @@ async function fetchData() {
 }
 
 async function randigimon(){
-  const res = await axios.get('/api/main');
-  const todaydg = await axios.get('/api/main/dg');
+  let rand = Math.floor(Math.random() * 141);
+  let drand = Math.floor(Math.random() * 1422);
+  const res = await axios.get(`/api/main?r=${rand}`);
+  const todaydg = await axios.get(`/api/main/dg?r=${drand}`);
   let dg_id = todaydg.data.id;
   const todaydgline = await axios.get(`/api/main/line?id=${dg_id}`);
   setLines(todaydgline.data);
@@ -149,7 +151,7 @@ const getFile = async function(){
           <div className={main.today_text_wrap}>
               <div className={main.today_ab_left} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>
                 <figure>
-                  <img src={rdg && rdg.image} alt=''/>
+                  <img src={rdg && rdg.images[0].href} alt=''/>
                   <figcaption>
                     <img src='/img/main/today_wrap.png' alt=''/>
                   </figcaption>
