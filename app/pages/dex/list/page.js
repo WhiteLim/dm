@@ -5,6 +5,7 @@ import axios from 'axios';
 import Footer from '@/app/comp/Footer';
 import Link from 'next/link';
 import {user_get} from '../../../comp/member/Login'
+import { useSearchParams } from 'next/navigation';
 
 const baseURL = 'https://www.digi-api.com/api/v1/digimon';
 
@@ -16,6 +17,19 @@ export default function Page() {
     const [btnClicked, setBtnClicked] = useState(false);
     const [member,setMember] = useState();
     const [rk,setRk] = useState();
+    const [tt,setTt] = useState(false);
+    const [mdg,setMdg] = useState();
+    const params = useSearchParams();
+    let mode = params.get('mode');
+    const keyword = params.get('search');
+
+
+    async function getdigimon() {
+        const mb_id = sessionStorage.getItem('loginstate');
+        const gdg = await axios.get(`/api/member/mydigimon?id=${mb_id}`)
+        setMdg(gdg.data);
+      }
+    
 
     async function fetchData() {
         const mb = await user_get()
@@ -24,7 +38,8 @@ export default function Page() {
     }
 
     useEffect( ()=>{
-        fetchData()
+        fetchData();
+        getdigimon();
     },[]);
 
 
@@ -50,18 +65,28 @@ export default function Page() {
     };
 
     const setLevelByType = (levels) => {
+        if(mode == 'search'){ setTt(true) }
         setLevel(levels);
         setPage(10);
     };
 
     useEffect(() => {
-        getContents();
+        if(mode == 'search' && tt ==false){
+            setSearchText(keyword)
+            find();
+        }else {
+            getContents();
+        }
     }, [level]);
 
-    async function searching(e) {
+    function searching(e) {
         e.preventDefault();
+        find()
+    }
+
+    async function find(){
         const newData = await axios.get(`${baseURL}?pageSize=1422`)
-        const searchTextLower = searchText.toLowerCase();
+        const searchTextLower = searchText.toLowerCase() == '' ? keyword.toLowerCase() : searchText.toLowerCase();
         const filterName = newData.data.content.filter(item =>
             item.name.toLowerCase().includes(searchTextLower)
         );
@@ -78,7 +103,7 @@ export default function Page() {
     }
 
 
-    if (!data || !member) return <></>;
+    if (!data || !member || !mdg) return <></>;
 
     return (
         <section className={li.list_page}>
@@ -108,10 +133,9 @@ export default function Page() {
                             <input id='search_box' type='search' name="search"
                                 maxLength='15' placeholder='디지몬을 검색해보세요.(영문검색)' pattern="[A-Za-z]+"
                                 value={searchText} onChange={(e) => setSearchText(e.target.value)} />
-                            <input name='date' type='hidden' value={new Date()} />
                         </label>
                         <label htmlFor="submit_btn">
-                            <input id='submit_btn' type='submit' name="save" value='검색' />
+                            <input id='submit_btn' type='submit' value='검색' />
                         </label>
                     </form>
                 </div>
@@ -145,9 +169,9 @@ export default function Page() {
                                         }}className={li.picture}>
                                             <img src={'/img/detail/digi_box.png'} alt="Digi Box" />
                                             <div className={li.digimon}>
-                                                <img src={v.image} className={li.digi_picture} alt="Digimon Image" />
+                                                <img src={v.image} className={`${li.digi_picture} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Digimon Image" />
                                                 <p>
-                                                    <img src={'/img/detail/mask.png'} className={li.mask} alt="Mask" />
+                                                    <img src={'/img/detail/mask.png'} className={`${li.mask} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Mask" />
                                                 </p>
                                             </div>
                                         </Link>

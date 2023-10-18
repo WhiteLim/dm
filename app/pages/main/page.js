@@ -21,10 +21,14 @@ import axios from 'axios';
 export default function page() {
 const input = useRef();
 const [data,setData] = useState();
+const [mdg,setMdg] = useState();
+const [lines,setLines] = useState();
 const [member,setMember] = useState();
 const [rk,setRk] = useState();
 const [rdg,setRdg] = useState();
 const nav = useRouter();
+//get으로 DB정보 가져오기
+const [ddata,setDdata] = useState([]);
 
 async function fetchData() {
     const mb = await user_get()
@@ -35,30 +39,46 @@ async function fetchData() {
 async function randigimon(){
   const res = await axios.get('/api/main');
   const todaydg = await axios.get('/api/main/dg');
+  let dg_id = todaydg.data.id;
+  const todaydgline = await axios.get(`/api/main/line?id=${dg_id}`);
+  setLines(todaydgline.data);
   setData(res.data.content)
   setRdg(todaydg.data)
+}
+
+async function getdigimon() {
+  const mb_id = sessionStorage.getItem('loginstate');
+  const gdg = await axios.get(`/api/member/mydigimon?id=${mb_id}`)
+  setMdg(gdg.data);
+}
+
+const getFile = async function(){
+  try {
+    const dbData = await axios.get('/api/borad/list');
+    setDdata(dbData.data);
+  } catch (error) {
+    console.error("AxiosError:", error);
+  }
 }
   
   useEffect(()=>{
     //input.current.focus();
     fetchData()
     randigimon()
+    getFile(); getdigimon()
   },[]);
-
   
   const moving = (link)=>{
     nav.push(link)
   }
   const ser = (e)=>{
     e.preventDefault();
-    console.log('a');
+    const search = e.target.search.value;
+    if(search == '') { alert("검색할 디지몬을 입력해주세요."); return false; }
+    nav.push(`/pages/dex/list?mode=search&search=${search}`);
   }
 
-  const detail = ()=>{
-    mypage.push(`../dex/detail?id=${rdg.id}`);
-  }
-
-  if(!member) return <></>
+  if(!member || !mdg || !lines) return <></>
 
 
   return (
@@ -79,9 +99,9 @@ async function randigimon(){
         </div>
         <div className={main.search_input}>
           <div className={main.input}>
-            <form onSubmit={ser}>
-              <input type="text" placeholder='디지몬을 검색해보세요.' ref={input}/>
-              <figure><input type="submit" value="" /></figure>
+            <form className={main.input_form} onSubmit={ser}>
+              <input type="text" name='search' className={main.inputs} placeholder='디지몬을 검색해보세요.' ref={input}/>
+              <figure><input type="submit" className={main.fig_input} value="" /></figure>
             </form>
           </div>
         </div>
@@ -111,8 +131,8 @@ async function randigimon(){
           >
             {
               data && data.map((v,k)=>(
-                <SwiperSlide className={main.swipers } key={k}>
-                  <div className={main.swipers_1}>
+                <SwiperSlide className={`${main.swipers}`} key={k}>
+                  <div className={`${main.swipers_1}  ${mdg?.some(n => n.dg_id == v.id) && main.active || main.null} `}>
                     <figure className={main.random_digimon} onClick={()=>{ moving(`/pages/dex/detail?id=${v.id}`) }}><img src={v.image} alt={v.name} /></figure>
                   </div>
                   <div className={main.random_digimon_box_wrap}>
@@ -141,22 +161,22 @@ async function randigimon(){
                   <figure className={main.today_ab_boxs2}><img src='/img/main/today_boxs2.png' alt=''/></figure>
                   <p>{rdg && rdg.name.slice(0,10)}</p>
                 </div>
-                <div className={main.todya_ab_right2}>
-                  <figure className={main.todya_ab_right2_box}><img src='/img/main/today_box.png' alt=''/></figure>
-                  <div className={main.todya_ab_right2_txt}>
-                    <span>팬더몬이 짱임. 아구몬 못생김</span>
-                    <figure><img src='/img/main/icon/1.png' alt=''/></figure>
-                    <span>아아중독</span>
-                  </div>
-                </div>
-                <div className={main.todya_ab_right2}>
-                  <figure className={main.todya_ab_right2_box}><img src='/img/main/today_box.png' alt=''/></figure>
-                  <div className={main.todya_ab_right2_txt}>
-                    <span>팬더몬이 짱임. 아구몬 못생김</span>
-                    <figure><img src='/img/main/icon/1.png' alt=''/></figure>
-                    <span>아아중독</span>
-                  </div>
-                </div>
+                {
+                  lines.length <= 0 ?
+                  <div className={main.todya_ab_right2}> 아직 작성 된 한줄 평이 없습니다. <p className={main.p2} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>오늘의 한줄평 더보기 ▶</p></div>
+                  
+                  :
+                  lines.slice(0,2).map(v=>(
+                    <div className={main.todya_ab_right2} key={v.num}>
+                      <figure className={main.todya_ab_right2_box}><img src='/img/main/today_box.png' alt=''/></figure>
+                      <div className={main.todya_ab_right2_txt}>
+                        <span>{v.content}</span>
+                        <figure><img src={`/img/main/icon/${v.wr_icon}.png`} alt=''/></figure>
+                        <span>{v.wr_nick}</span>
+                      </div>
+                    </div>
+                  ))
+                }
                 <p className={main.p2} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>오늘의 한줄평 더보기 ▶</p>
               </div>
           </div>
@@ -188,96 +208,25 @@ async function randigimon(){
                 },
               }}
             >
-              <SwiperSlide className={main.swipers_2}>
-                <div className={main.today_dms_wrap}>
-                  <figure className={main.today_dms}><img src='/img/main/1.png' alt=''/></figure>
-                </div>
-                <div className={main.today_dm_info_wrap}>
-                  <div className={main.today_dm_info}>
-                    <figure className={main.today_dm_face}><img src='/img/main/face/1.png' alt=''/></figure>
-                    <div className={main.today_dm_infos}>
-                      <figure className={main.today_dm_info_icon}><img src='/img/main/icon/1.png' alt=''/></figure>
-                      <span>아아중독</span>
+              {
+                ddata.slice(0,10).map((v,k)=>(
+                  <SwiperSlide className={main.swipers_2} key={v.num} onClick={()=>{ moving(`/pages/borad/view?id=${v.num}`) }}>
+                    <div className={main.today_dms_wrap}>
+                      <figure className={main.today_dms}><img src={v.path} alt=''/></figure>
                     </div>
-                    <p>님의 D.M</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className={main.swipers_2}>
-                <div className={main.today_dms_wrap}>
-                  <figure className={main.today_dms}><img src='/img/main/1.png' alt=''/></figure>
-                </div>
-                <div className={main.today_dm_info_wrap}>
-                  <div className={main.today_dm_info}>
-                    <figure className={main.today_dm_face}><img src='/img/main/face/1.png' alt=''/></figure>
-                    <div className={main.today_dm_infos}>
-                      <figure className={main.today_dm_info_icon}><img src='/img/main/icon/1.png' alt=''/></figure>
-                      <span>아아중독</span>
+                    <div className={main.today_dm_info_wrap}>
+                      <div className={main.today_dm_info}>
+                        <figure className={main.today_dm_face}><img src={`/img/main/face/${v.cc}.png`} alt=''/></figure>
+                        <div className={main.today_dm_infos}>
+                          <figure className={main.today_dm_info_icon}><img src={`/img/main/icon/${v.img}.png`} alt=''/></figure>
+                          <span>{v.title}</span>
+                        </div>
+                        <p>님의 D.M</p>
+                      </div>
                     </div>
-                    <p>님의 D.M</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className={main.swipers_2}>
-                <div className={main.today_dms_wrap}>
-                  <figure className={main.today_dms}><img src='/img/main/1.png' alt=''/></figure>
-                </div>
-                <div className={main.today_dm_info_wrap}>
-                  <div className={main.today_dm_info}>
-                    <figure className={main.today_dm_face}><img src='/img/main/face/1.png' alt=''/></figure>
-                    <div className={main.today_dm_infos}>
-                      <figure className={main.today_dm_info_icon}><img src='/img/main/icon/1.png' alt=''/></figure>
-                      <span>아아중독</span>
-                    </div>
-                    <p>님의 D.M</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className={main.swipers_2}>
-                <div className={main.today_dms_wrap}>
-                  <figure className={main.today_dms}><img src='/img/main/1.png' alt=''/></figure>
-                </div>
-                <div className={main.today_dm_info_wrap}>
-                  <div className={main.today_dm_info}>
-                    <figure className={main.today_dm_face}><img src='/img/main/face/1.png' alt=''/></figure>
-                    <div className={main.today_dm_infos}>
-                      <figure className={main.today_dm_info_icon}><img src='/img/main/icon/1.png' alt=''/></figure>
-                      <span>아아중독</span>
-                    </div>
-                    <p>님의 D.M</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className={main.swipers_2}>
-                <div className={main.today_dms_wrap}>
-                  <figure className={main.today_dms}><img src='/img/main/1.png' alt=''/></figure>
-                </div>
-                <div className={main.today_dm_info_wrap}>
-                  <div className={main.today_dm_info}>
-                    <figure className={main.today_dm_face}><img src='/img/main/face/1.png' alt=''/></figure>
-                    <div className={main.today_dm_infos}>
-                      <figure className={main.today_dm_info_icon}><img src='/img/main/icon/1.png' alt=''/></figure>
-                      <span>아아중독</span>
-                    </div>
-                    <p>님의 D.M</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide className={main.swipers_2}>
-                <div className={main.today_dms_wrap}>
-                  <figure className={main.today_dms}><img src='/img/main/1.png' alt=''/></figure>
-                </div>
-                <div className={main.today_dm_info_wrap}>
-                  <div className={main.today_dm_info}>
-                    <figure className={main.today_dm_face}><img src='/img/main/face/1.png' alt=''/></figure>
-                    <div className={main.today_dm_infos}>
-                      <figure className={main.today_dm_info_icon}><img src='/img/main/icon/1.png' alt=''/></figure>
-                      <span>아아중독</span>
-                    </div>
-                    <p>님의 D.M</p>
-                  </div>
-                </div>
-              </SwiperSlide>
+                  </SwiperSlide>
+                ))
+              }
             </Swiper>
           </div>
         </div>

@@ -222,7 +222,7 @@
           .list_name{
             display: flex;
             align-items: center;
-            margin-right: 145px;
+            margin-right: 130px;
             >figure{
               font-size: 0;
               margin-right: 5px;
@@ -256,16 +256,18 @@
         .logo_nick_wrap{
           width: 300px;
           .nick_txt{
-            width: 85%;
+            width: 90%;
             .nick_wrap{
               span{
                 font-size: 16px;
                 margin-right: 10px;
+                margin-right: 0;
               }
             }
             span{
               font-size: 14px;
               margin-top: 10px;
+              margin-right: 0;
             }
             figure{
               width: 20%;
@@ -286,6 +288,7 @@
           }
         }
         .best{
+          overflow: hidden;
           >ul{
             width: 100%;
             li{
@@ -339,7 +342,7 @@
               }
               .best_txt1{
                 background-size: 60%;
-                transform: translateY(20px);
+                transform: translateY(10px);
                 >figure{
                   display: none;
                 }
@@ -349,7 +352,7 @@
               }
               .best_txt2{
                 background-size:60%;
-                transform: translateY(20px);
+                transform: translateY(15px);
                 >figure{
                   display: none;
                 }

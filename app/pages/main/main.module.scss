@@ -128,6 +128,16 @@
               background-repeat: no-repeat;
               background-size: 100% 100%;
               margin-bottom: 5px;
+              &.active {
+                background: url("/img/main/digimon_wrap_1.png");
+                .random_digimon{
+
+                  opacity: 1;
+                }
+              }
+              &.null {
+                opacity: 0.9;
+              }
             }
             .random_digimon{
               font-size: 0;
@@ -186,6 +196,7 @@
         justify-content: space-evenly;
         align-items: center;
         padding:50px 0 60px;
+        min-height: 350px;
           .today_ab_left{
             display: flex;
             figure{
@@ -308,6 +319,13 @@
               display: flex;
               align-items: center;
               justify-content: center;
+              padding-bottom:20px;
+              img {
+                background: #fff;
+                width: 80%;
+                height: 70%;
+                object-fit: cover;
+              }
             }
             .today_dm_info_wrap{
               position: absolute;
@@ -334,6 +352,10 @@
                   img{
                     width:40px;
                   }
+                }
+                
+                span{
+                  font-family: 'neodgm_code';
                 }
                 .today_dm_infos{
                   display: flex;
@@ -377,21 +399,20 @@
         .logo_nick_wrap{
           width:300px;
           .nick_txt{
-            width: 85%;
+            width: 90%;
             .nick_wrap{
-              display: flex;
-              align-items: flex-end;
               span{
                 font-size: 16px;
                 margin-top: 10px;
+                margin-right: 0;
               }
             }
             span{
               font-size: 14px;
               margin-top: 10px;
+              margin-right: 0;
             }
             figure{
-              margin-top:0px;
               width: 20%;
               img{
                 width: 100%;
@@ -474,7 +495,7 @@
                 background-repeat: no-repeat;
                 background-size: 100% 100%;
                 p{
-                  font-size: 12px;
+                  font-size: 15px;
                 }
               }
             }
@@ -647,10 +668,14 @@
                       img{
                         width:16px;
                       }
+                      span{
+                        font-family: 'neodgm_code';
+                      }
                     }
                     span{
                       text-shadow: 2px 2px 0px #1F93FF;
                       font-size:18px;
+                      font-family: 'neodgm_code';
                     }
                   }
                   p{
@@ -748,5 +773,18 @@
 @media (max-width:575px) {
   .main_wrap .bg .search_input .input {
     padding:0 40px;
+    .input_form{
+      .inputs{
+        font-size: 14px;
+      }
+      figure{
+        margin-left: 0;
+        .fig_input{
+          background-size: 75%;
+          background-position: center right;
+          background-repeat: no-repeat;
+        }
+      }
+    }
   }
 }

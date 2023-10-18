@@ -131,7 +131,7 @@ export default function page() {
 
       //저장 클릭후 로딩창 띄우기
       goNextPage();
-  }else{alert('디지몬을 선택해 주세요')}
+  }else{}
 
   }
 
@@ -159,11 +159,7 @@ export default function page() {
         window.addEventListener('resize',resizeCanvas)
     
         resizeCanvas();
-      
     }, 500);
-
-    
-    
   },[canvasWidth])
 
 
@@ -245,7 +241,6 @@ export default function page() {
             </figure>
             <div className={style.pfPictureWrap}>
               <div className={style.pfPicture}>
-                <img className={style.pfPicDeco} src='/img/board/write/pfDeco.png'/>
                 <img className={style.pfPic} src={`/img/main/face/${member.mb_img}.png`}/>
               </div>
             </div>
@@ -307,7 +302,7 @@ export default function page() {
         </div>
 
         <div className={style.save} id="saveId" onClick={wantSave}>
-          <img className={style.saveDeco} src='/img/board/write/saveBtn.png' style={selectedDigimon ? {} : { filter: 'brightness(0.7)' }} />
+          <img className={style.saveDeco} src='/img/board/write/saveBtn.png' style={selectedDigimon ? {} : { filter: 'brightness(0.7)',cursor: 'auto' }} />
         </div>
       </section>
 
