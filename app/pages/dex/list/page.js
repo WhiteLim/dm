@@ -11,13 +11,12 @@ const baseURL = 'https://www.digi-api.com/api/v1/digimon';
 export default function Page() {
     const [data, setData] = useState([]); // 검색용
     const [page, setPage] = useState(10);
-    const [mode, setMode] = useState(1);
     const [level, setLevel] = useState(['Baby I', 'Baby II', '', '']);
     const [searchText, setSearchText] = useState('');
     const [btnClicked, setBtnClicked] = useState(false);
-
     const [member,setMember] = useState();
     const [rk,setRk] = useState();
+
     async function fetchData() {
         const mb = await user_get()
         setRk(mb.rk.data)

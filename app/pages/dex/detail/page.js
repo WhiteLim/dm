@@ -17,38 +17,52 @@ export default function page() {
     // 모달 버튼 클릭 유무를 저장할 state
     const [showModal, setShowModal] = useState(false)
     const [showModal2, setShowModal2] = useState(false)
+    const [DescriptionInModal, setDescriptionInModal] = useState('')
+    const [DescriptionInModal2, setDescriptionInModal2] = useState('')
     const [data, setData] = useState();
     const [reviewText, setReviewText] = useState([])
     const params = useSearchParams();
     const idParam = params.get('id');
     const [member, setMember] = useState();
     const [rk, setRk] = useState();
+    const [likecnt, setLikecnt] = useState();
+    const [Result, setResult] = useState(false);
+    const [digimon, setDigimon] = useState();
+
     const nav = useRouter();
     async function fetchData() {
         const mb = await user_get()
         setRk(mb.rk.data)
         setMember(mb.data);
+        dglike()
+    }
+
+    async function dglike(){
+        const lik = await axios.get(`/api/dex/detail/like?num=${idParam}`)
+        setLikecnt(lik.data)
     }
 
     useEffect(() => {
         fetchData()
     }, []);
 
-
-
     // 버튼 클릭시 모달 버튼 클릭 유무를 설정하는 state 함수
-    const clickModal = () => {
+    const clickModal = (des) => {
         setShowModal(!showModal);
+        setDescriptionInModal(des);
+        window.scrollTo({ top: 0, behavior: "auto" });
         const body = document.querySelector('body');
         if (!showModal) {
-            body.style.overflow = "hidden"; // 스타일 속성을 수정
+            body.style.overflow = "hidden";
         } else {
-            body.style.overflow = "auto"; // 스타일 속성을 수정
+            body.style.overflow = "auto";
         }
     }
-    const clickModal2 = () => {
-        console.log('sdssdf')
+
+    const clickModal2 = (des2) => {
         setShowModal2(!showModal2);
+        setDescriptionInModal2(des2)
+        window.scrollTo({ top: 0, behavior: "auto" });
         const body = document.querySelector('body');
         if (!showModal2) {
             body.style.overflow = "hidden"; // 스타일 속성을 수정
@@ -62,22 +76,26 @@ export default function page() {
         const formData = new FormData(e.target);
         const value = Object.fromEntries(formData);
         setReviewText([...reviewText, value.search]);
-        console.log(value.date);
     }
-    const like = () => {
-        const like_btn = document.querySelector('.likes');
+    const like =async () => {
+        const dd = {idParam,id:member.mb_id}
+        await axios.post(`/api/dex/detail/like`,dd)
+        dglike()
     }
 
     const detailData = function () {
         axios.get(`/api/dex/detail?num=${idParam}`)
             .then(res => {
                 setData(res.data);
-                console.log(res.data);
             })
     }
 
     useEffect(() => {
-        detailData()
+        if(!idParam) {
+            history.back();
+        }else {
+            detailData()
+        }
     }, [idParam])
 
     const moving = (link) => {
@@ -88,12 +106,24 @@ export default function page() {
         e.target.src = 'https://digimon-api.com/images/digimon/w/Earthdramon.png';
     }
 
+    const performAction = (get) => {
+        let isSuccess = Math.floor(Math.random() * 100)
+        if(isSuccess <= 20) {
+            alert('잡았따 이자식');
+        } else {
+            alert('어디갔냐');
+        }
+    };
+
+
+
+
     if (!data || !member) return <></>;
 
     return (
         <section className={de.detail} key={data.id}>
-            {showModal && <Modal clickModal={clickModal} />}
-            {showModal2 && <Modal2 clickModal2={clickModal2} />}
+            {showModal && <Modal clickModal={clickModal} DescriptionInModal={DescriptionInModal} />}
+            {showModal2 && <Modal2 clickModal2={clickModal2} DescriptionInModal2={DescriptionInModal2} />}
             <div className={de.detail_page}>
                 <div className={de.user_info}>
                     <p><img src={'/img/detail/logo.png'} /></p>
@@ -117,7 +147,7 @@ export default function page() {
                             <p className={de.like} onClick={like} >
                                 <img src={'/img/detail/like_box.png'} />
                                 <img src={'/img/detail/like_1.png'} className={de.likes} />
-                                <span>1,234</span>
+                                <span>{likecnt}</span>
                             </p>
                             <div className={de.dg_img}>
                                 <p className={de.dg_img_1}>
@@ -146,9 +176,11 @@ export default function page() {
                                 <p>TYPE</p>
                                 <div>
                                     {
-                                        data.types.map((type, key_2) => (
-                                            <span key={key_2}>{type.type}</span>
-                                        ))
+                                        data.types.length === 0
+                                            ? <span>none</span>
+                                            : data.types.map((type, key_2) => (
+                                                <span key={key_2}>{type.type}</span>
+                                            ))
                                     }
                                 </div>
                             </li>
@@ -160,24 +192,20 @@ export default function page() {
                             </li>
                         </ul>
                     </div>
-                    <div className={de.description}>
-                        <p className={de.description_txt} onClick={clickModal} >
-                            {
-                                data.descriptions.filter(n => n.language == 'en_us').map((v) => (
-                                    v.description
-                                ))
-                            }
+                    <div className={de.description} onClick={() => clickModal(data)}>
+                        <p className={de.description_txt}>
+                            {data.descriptions.find(description => description.language === 'en_us')?.description || 'The data is not available.'}
                         </p>
                         <div className={de.description_more}>
                             <p><img src={'/img/detail/more.png'} /></p>
                         </div>
                     </div>
                     <div className={de.get_btn}>
-                        <p>포획하기</p>
+                        <p onClick={() => performAction(data)}>포획하기</p>
                     </div>
                 </div>
                 <div className={de.skill_more}>
-                    <p onClick={clickModal2}>스킬 더보기</p>
+                    <p onClick={() => clickModal2(data)}>스킬 더보기</p>
                 </div>
                 <div className={de.skill_info}>
                     <div className={de.skill}>
@@ -187,9 +215,11 @@ export default function page() {
                         </div>
                         <div className={de.skill_txt}>
                             {
-                                data.skills.slice(0, 4).map((skill, key_3) => (
-                                    <p key={key_3}>{skill.skill}</p>
-                                ))
+                                data.skills.length === 0
+                                    ? <p>No data</p>
+                                    : data.skills.slice(0, 4).map((skill, key_3) => (
+                                        <p key={key_3}>{skill.skill}</p>
+                                    ))
                             }
                         </div>
                     </div>
@@ -238,15 +268,15 @@ export default function page() {
                             modules={[Pagination]}
                             className="mySwiper"
                             breakpoints={{
-                                32: {
+                                320: {
                                     slidesPerView: 1.5,
                                     spaceBetween: 0,
                                 },
-                                360: {
+                                380: {
                                     slidesPerView: 2.5,
                                     spaceBetween: 5,
                                 },
-                                500: {
+                                530: {
                                     slidesPerView: 3.5,
                                     spaceBetween: 10,
                                 },
@@ -256,34 +286,36 @@ export default function page() {
                                 },
                             }}>
                             {
-                                data.priorEvolutions.map((priorEvolutions, key_5) => (
-                                    <SwiperSlide key={key_5}>
-                                        <div className={de.list_box}>
-                                            {priorEvolutions.id ? (
+                                data.priorEvolutions.length === 0
+                                    ? <div className={de.no_data}>No data</div>
+                                    : data.priorEvolutions.map((priorEvolutions, key_5) => (
+                                        <SwiperSlide key={key_5}>
+                                            <div className={de.list_box}>
                                                 <Link href={{
                                                     pathname: '../dex/detail',
                                                     query: {
                                                         id: priorEvolutions.id,
                                                     }
-                                                }} className={de.Evolution_list}>
-                                                    <div className={de.Evolution_data}>
-                                                        <div className={de.picture}>
-                                                            <div className={de.digimon}>
-                                                                <img src={priorEvolutions.image} onError={handleImgError} className={de.digi_picture} />
-                                                                <p>
-                                                                    <img src={'/img/detail/mask.png'} className={de.mask} />
-                                                                </p>
+                                                }} className={de.Evolution_list} >
+                                                    {priorEvolutions.id == priorEvolutions.id ? (
+                                                        <div className={de.Evolution_data}>
+                                                            <div className={de.picture}>
+                                                                <div className={de.digimon}>
+                                                                    <img src={priorEvolutions.image} onError={handleImgError} className={de.digi_picture} />
+                                                                    <p>
+                                                                        <img src={'/img/detail/mask.png'} className={de.mask} />
+                                                                    </p>
+                                                                </div>
+                                                            </div>
+                                                            <div className={de.digi_name}>
+                                                                <span>{priorEvolutions.digimon}</span>
                                                             </div>
                                                         </div>
-                                                        <div className={de.digi_name}>
-                                                            <span>{priorEvolutions.digimon}</span>
-                                                        </div>
-                                                    </div>
+                                                    ) : (alert('데이터없음'))}
                                                 </Link>
-                                            ) : (alert('볼 수 없다구'))}
-                                        </div>
-                                    </SwiperSlide>
-                                ))
+                                            </div>
+                                        </SwiperSlide>
+                                    ))
                             }
                         </Swiper>
                     </div>
@@ -299,15 +331,15 @@ export default function page() {
                             modules={[Pagination]}
                             className="mySwiper"
                             breakpoints={{
-                                32: {
+                                320: {
                                     slidesPerView: 1.5,
                                     spaceBetween: 0,
                                 },
-                                360: {
+                                380: {
                                     slidesPerView: 2.5,
                                     spaceBetween: 5,
                                 },
-                                500: {
+                                530: {
                                     slidesPerView: 3.5,
                                     spaceBetween: 10,
                                 },
@@ -317,7 +349,9 @@ export default function page() {
                                 },
                             }}>
                             {
-                                data.nextEvolutions.map((nextEvolutions, key_6) => (
+                                data.nextEvolutions.length === 0
+                                ? <div className={de.no_data}>No data</div>
+                                : data.nextEvolutions.map((nextEvolutions, key_6) => (
                                     <SwiperSlide key={key_6}>
                                         <div className={de.list_box}>
                                             <Link href={{
@@ -354,4 +388,3 @@ export default function page() {
         </section >
     )
 }
-

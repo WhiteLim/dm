@@ -16,9 +16,9 @@ export default function LoginCheck() {
     let move;
   
     if(login == 0 ) {
-      move = './pages/intro';
+      move = '/pages/intro';
     } else {
-      move = './pages/main';
+      move = '/pages/main';
     }
     
     navi.push(move)

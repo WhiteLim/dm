@@ -290,6 +290,7 @@
             .description {
                 padding: 20px 0;
                 width: 580px;
+                height: 142px;
                 display: flex;
                 align-items: flex-end;
                 justify-content: center;
@@ -310,7 +311,7 @@
                 }
                 .description_more {
                     p {
-                        width: 16px;
+                        width: 18px;
                         height: 24px;
                         img {
                             width: 10px;
@@ -330,8 +331,8 @@
                 }
             }
             .get_btn {
-                padding: 24px 0;
                 p {
+                    padding: 24px 0;
                     width: 220px;
                     margin: 0 auto;
                     color: #092b4f;
@@ -584,6 +585,15 @@
                         top: 30px;
                     }
                 }
+                .no_data {
+                    width: 150px;
+                    height: 150px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                    text-shadow: 2px 1px 0 #1f93ff;
+                }
                 .list_box {
                     width: 100%;
                     .Evolution_list {
@@ -625,6 +635,7 @@
                                 width: 200px;
                                 height: 80px;
                                 span {
+                                    color: #ffffff;
                                     position: absolute;
                                     text-align: center;
                                     width: 120px;
@@ -658,6 +669,15 @@
                         top: 30px;
                     }
                 }
+                .no_data {
+                    width: 150px;
+                    height: 150px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 18px;
+                    text-shadow: 2px 1px 0 #1f93ff;
+                }
                 .list_box {
                     width: 100%;
                     .Evolution_list {
@@ -699,6 +719,7 @@
                                 width: 200px;
                                 height: 80px;
                                 span {
+                                    color: #ffffff;
                                     position: absolute;
                                     text-align: center;
                                     width: 120px;

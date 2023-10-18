@@ -13,27 +13,46 @@
         .modal {
             background-image: url("/img/detail/modal.png");
             background-repeat: no-repeat;
+            background-size: 600px 500px;
             text-shadow: 2px 1px 0 #1f93ff;
             margin: 0 20px;
             position: absolute;
             top: 20%;
             width: 600px;
-            height: 500px;
+            height: 750px;
             div {
                 h3 {
                     padding: 40px 0;
                     font-size: 22px;
                     text-align: center;
                 }
-                p {
+                div {
                     width: 500px;
+                    height: 310px;
                     margin: 0 auto;
-                    line-height: 36px;
+                    p {
+                        padding-right: 20px;
+                        width: 500px;
+                        height: 310px;
+                        line-height: 30px;
+                        overflow: scroll;
+                        overflow-x: hidden;
+                    }
+                }
+                p::-webkit-scrollbar {
+                    width: 10px;
+                    background-color: transparent;
+                    border: 1px solid #00f3ff;
+                }
+                p::-webkit-scrollbar-thumb {
+                    background-color: #00f3ff;
+                    background-clip: padding-box;
+                    border: 3px solid transparent;
                 }
             }
             span {
                 position: absolute;
-                bottom: 26px;
+                bottom: 36%;
                 width: 200px;
                 margin: 0 200px;
                 padding: 16px 0;
@@ -64,7 +83,7 @@
             text-shadow: 2px 1px 0 #1f93ff;
             margin: 0 20px;
             position: absolute;
-            top: 10%;
+            top: 4%;
             width: 600px;
             height: 750px;
             .more {
@@ -75,7 +94,10 @@
                 }
                 .skill_list {
                     width: 440px;
+                    height: 500px;
                     margin: 20px auto;
+                    overflow: scroll;
+                    overflow-x: hidden;
                     li {
                         > p {
                             display: flex;
@@ -92,14 +114,24 @@
                         }
                         .skill_description {
                             display: none;
-                            width: 440px;
-                            height: 80px;
-                            padding: 10px 0 0 20px;
+                            width: 400px;
+                            height: auto;
+                            padding: 20px 0 20px 50px;
                             font-size: 18px;
                             > span {
                             }
                         }
                     }
+                }
+                ul::-webkit-scrollbar {
+                    width: 10px;
+                    background-color: transparent;
+                    border: 1px solid #00f3ff;
+                }
+                ul::-webkit-scrollbar-thumb {
+                    background-color: #00f3ff;
+                    background-clip: padding-box;
+                    border: 3px solid transparent;
                 }
             }
             > p {
