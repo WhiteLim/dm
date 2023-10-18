@@ -176,10 +176,10 @@ const getFile = async function(){
                         <figure><img src={`/img/main/icon/${v.wr_icon}.png`} alt=''/></figure>
                         <span>{v.wr_nick}</span>
                       </div>
+                      <p className={main.p2} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>오늘의 한줄평 더보기 ▶</p>
                     </div>
                   ))
                 }
-                <p className={main.p2} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>오늘의 한줄평 더보기 ▶</p>
               </div>
           </div>
         </div>
