@@ -17,117 +17,116 @@
       :nth-child(1) {
         position: absolute;
       }
+    }
+  }
 
-      /* 
-      :nth-child(2) {
-      } */
-      
+  .pro_view_bg {
+    margin-top: 20px;
+    height: 100%;
+
+    .pro_view {
+      background-image: url('/img/member/mypage/Group 194.png');
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      width: 95%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto;
+
+      .pro_img {
+        width: 180px;
       }
     }
 
-    .pro_view_bg {
-      margin-top: 20px;
-      height: 100%;
+    .pro_img {
+      margin-top: 35px;
+      margin-right: 10px;
+    }
 
-      .pro_view {
-        background-image: url('/img/member/mypage/Group 194.png');
+    p {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .pro_view_img {
+      width: 90%;
+      margin-right: 20px;
+      margin-bottom: 50px;
+      position: relative;
+    }
+
+    .pro_view_form {
+      max-width: 640px;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 90%;
+      left: 0;
+      right: 0;
+      top: 465px;
+      margin: 0 auto;
+
+      .text_box {
+        border: none;
+        outline: none;
+        background: transparent;
+        color: white;
+        width: 140px;
+        margin-left: 20px;
+        height: 30px;
+        font-size: 25px;
+        font-family: 'neodgm_code';
+      }
+
+      .submit_btn {
+        background-color: transparent;
+        border: 0px transparent solid;
+        width: 40px;
+        height: 40px;
+      }
+
+      img {
+        width: 30px;
+        margin: 0;
+      }
+    }
+
+    .modal_bg {
+
+      position: fixed;
+      max-width: 640px;
+      width: 100%;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.7);
+      z-index: 7;
+
+      .modal_p {
+        background-image: url('/img/member/mypage/Group 233.png');
         background-repeat: no-repeat;
         background-size: 100% 100%;
-        width: 95%;
-        height: 100%;
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
-        margin: 0 auto;
-        .pro_img {
-          width: 180px;
-        }
-        }
-        .pro_img {
-          margin-top: 35px;
-          margin-right: 10px;
-        }
+        gap: 20px;
+        padding: 60px;
+/*         margin-top: 200px; */
 
-        p {
-          margin-top: 20px;
-          text-align: center;
-        }
-
-        .pro_view_img{
-          width: 90%;
-          margin-right: 20px;
-          margin-bottom: 50px;
-          position: relative;
-        }
-
-        .pro_view_form {
-          max-width: 640px;
-          position: absolute;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 90%;
-          left: 0;
-          right: 0;
-          top: 465px;
-          margin: 0 auto;
-
-          .text_box {
-            border: none;
-            outline: none;
-            background: transparent;
-            color: white;
-            width: 140px;
-            margin-left: 20px;
-            height: 30px;
-            font-size: 25px;
-            font-family: 'neodgm_code';
-          }
-
-          .submit_btn {
-            background-color: transparent;
-            border: 0px transparent solid;
-            width: 40px;
-            height: 40px;
-          }
-
+        >figure {
           img {
-            width: 30px;
-            margin: 0;
+            width: 100px;
+            height: 100px;
+            opacity: 0.6;
           }
         }
-
-        .modal_bg{
-          
-          position: fixed;
-          max-width: 640px;
-          width: 100%;
-          height: 100vh;
-          background-color:rgba(0,0,0,0.7) ;
-          z-index: 7;
-          .modal_p{
-            background-image: url('/img/member/mypage/Group 233.png');
-            background-repeat: no-repeat;
-            background-size: 100% 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            padding: 60px;
-            margin-top: 200px;
-            >figure{
-              img{
-                width: 100px;
-                height: 100px;
-                opacity: 0.6;
-              }
-            }
-          }
       }
     }
   }
+}
 
 
 .capsule {
@@ -183,6 +182,67 @@
         }
       }
     }
+  }
+}
+
+@media (max-width: 360px) {
+  
+  .bg_img{
+    .pro{
+      .pro_view_bg {
+          .pro_view{
+            .pro_img{
+                width: 150px;
+            }
+            .pro_view_form {
+              top: 420px;
+              .text_box {
+                width: 170px;
+                font-size: 20px;
+              }
+              img {
+                width: 25px;
+              }
+            }
+            .modal_bg {
+              .modal_p {
+                gap: 10px;
+                padding: 40px;
+                margin-top: 150px;
+                >figure {
+                  img {
+                    width: 50px;
+                    height: 50px;
+                  }
+                }
+              }
+            }
+        }
+      }
+    }
+
+    .capsule {
+      figure {
+        img {
+          width: 100px;
+        }
+      }
+    }
+    
+    .last_btn {
+      margin: 20px 20px 150px;
+      display: flex;
+      flex-direction: column;
+      img {
+        width: 200px;
+        object-fit: cover;
+      }
+      .btn_ani {
+        img{
+          display: none;
+          }
+        }
+      }
   }
 }
 
