@@ -61,26 +61,23 @@ export function Modal2({ clickModal2, DescriptionInModal2 }) {
                     <div className={de.more}>
                         <h3>SKILL LIST</h3>
                         <ul className={de.skill_list} ref={elUl}>
-                            {DescriptionInModal2.skills.map((item, index) => (
-                                <li key={index}>
-                                    {
-                                        item.skills.length === 0
-                                            ? <p>No data</p>
-                                            : item.skills.map((skill, key_3) => (
-                                                <p key={key_3}>{skill.skill}</p>
-                                            ))
-                                    }
-                                    <div className={de.skill_description} style={{ display: openLiIndex === index ? 'block' : 'none' }}>
-                                        {
-                                            item.descriptions.length === 0
-                                                ? <p>There are no detailed information.</p>
-                                                : item.description.map((description, key_4) => (
-                                                    <p key={key_4}>{description.description}</p>
-                                                ))
-                                        }
-                                    </div>
-                                </li>
-                            ))}
+                            {
+                                DescriptionInModal2.skills.length <= 0 ?
+                                <li><p>No Data</p></li>
+                                :
+                                DescriptionInModal2.skills.map((item, index) => (
+                                    <li key={index}>
+                                        <p >{item.skill}</p>
+                                        <div className={de.skill_description} style={{ display: openLiIndex === index ? 'block' : 'none' }}>
+                                            {
+                                                item.description === " "
+                                                    ? <p>There are no detailed information.</p>
+                                                    : <p>{item.description}</p>
+                                            }
+                                        </div>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                     <p onClick={() => clickModal2()}>창닫기</p>

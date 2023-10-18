@@ -97,7 +97,9 @@
     }
 
     .modal_bg {
-
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: fixed;
       max-width: 640px;
       width: 100%;

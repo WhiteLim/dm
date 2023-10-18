@@ -36,6 +36,9 @@ export default function page() {
 
   const alertClose = () =>{
     setIsAlertOpen(false);
+    if(altext == "변경완료" || altext == '닉네임 변경 완료'){
+      location.reload();
+    }
   };
 
 
@@ -44,24 +47,19 @@ export default function page() {
     const button = fig.current?.childNodes
       
     button?.forEach((v, k) => {
-      if(k+1 == member?.mb_icon){
-        button[k].childNodes[0].style.opacity = 1
-      }
-      
+      if(k+1 == member?.mb_icon){  button[k].childNodes[0].style.opacity = 1 }
       v.onclick = () => {
         button[num].childNodes[0].style.opacity = 0.6
         v.childNodes[0].style.opacity = 1
-        setNum(k)
-        if (num == k) {
+        if (k == member.mb_icon-1) {
           alertOpen('같은 캡슐로 변경은 불가능합니다.')
-          //alert("같은 캡슐로 변경은 불가능합니다.")
+          return false;
         } else {
           const send = {id:member?.mb_id,cc:k+1}
           axios.post('/api/member/mypage/cc',send)
           fetchData();
           alertOpen('변경완료')
-          //alert("변경완료");
-          location.reload();
+          return false;
         }
       }
     });
@@ -79,9 +77,9 @@ export default function page() {
         }
         a.addEventListener('click' , () =>{
           let send = {id:member.mb_id,img:b+1}
+          alertOpen('변경완료')
           axios.post('/api/member/mypage/face',send)
           fetchData()
-          location.reload();
         })
       })
 
@@ -231,7 +229,7 @@ export default function page() {
           <img src='/img/member/join/modal.png' alt=''/>
           <div className={style.alert_text}>
           <p>{altext}</p>
-          <input type='image' src='/img/member/mypage/Group 206.png' className = {style.alert_btn}  onClick={() => alertClose()}/>
+          <input type='image' src='/img/member/mypage/ok.png' className = {style.alert_btn}  onClick={() => alertClose()}/>
           </div>
         </form>
         )}
