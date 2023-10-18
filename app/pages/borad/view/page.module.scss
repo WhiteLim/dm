@@ -256,16 +256,18 @@
             }
         }
         .bigbox{
-            width: 588px; height: 471px;
+            width: 588px; height: 400px;
             background-image: url('/img/board/view/wrongAnsDecoBig.png');
             background-size: 100% 100%;
             background-repeat: no-repeat;
             object-fit: contain;
             .bigboxInner{
-                width: 95%;
+                overflow-y: scroll;
+                width: 95%; height: 250px;
                 margin: 0 auto;
                 margin-top: 50px;
                 text-align: left;
+                
                 .comment{
                     width: 100%; 
                     padding: 1% 0;
@@ -280,7 +282,94 @@
                     }
                 }
             }
+            ::-webkit-scrollbar {
+                width: 10px;
+                background-color: transparent; 
+                border: 1px solid #00F3FF;
+            }
+            ::-webkit-scrollbar-thumb {
+                width: 4px;
+                height: 62px;
+                background-color: #00F3FF;
+                background-clip: padding-box;
+                border: 3px solid transparent;
+            }
         }
+    }
+    .Oanswer{
+        z-index: 5;
+        width: 640px; height: 100vh;
+        margin: 0 auto;
+        backdrop-filter: blur(3px);
+        position: fixed; bottom: 0; left: 50%;
+        transform: translate(-50%, 0%);
+        @include flex(center,center){flex-direction: column};
+        .modalBg{}
+        .modalInner{
+            .rkName{
+                .iconNick{
+                    img{}
+                    figcaption{}
+                }
+                p{}
+            }
+            .youGotDM{
+                .eachDigimon{
+                    .cageWhole{
+                        .cage{width: 170px;}
+                        .mon{width: 81.6px; height: 90.44px;}
+                    }
+                    .nameWhole{
+                        .nameWrap{
+                            .namePlate{width: 136px;}
+                            .nameInner{
+                                width: 129.2px;
+                                .smallFace{
+                                    width: 23.8px; height: 23.8px;
+                                    transform: translate(45%,-10%);
+                                }
+                                .textwrap{
+                                    transform: translate(0,-15%);
+                                    .iconNameLine{
+                                        .name{font-size: 14px;}
+                                    }
+                                    .fromWho{font-size: 14px;}
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        }
+    .Xanswer{
+        z-index: 5;
+        width: 640px; height: 100vh;
+        margin: 0 auto;
+        background-color: rgb(0, 0, 0,0.5);
+        backdrop-filter: blur(3px);
+        position: fixed; bottom: 0; left: 50%;
+        transform: translate(-50%, 0%);
+        @include flex(center,center){flex-direction: column};
+
+        .modalBg{}
+        .askRetry{
+            transform: translate(0%,-150%);
+            .askText{
+                color: #F00;
+                text-align: center;
+                text-shadow: 2px 1px 0px #005188;
+                font-family: NeoDunggeunmo;
+                font-size: 32px;
+                font-weight: 400;
+                letter-spacing: 3.2px;
+            }
+            .yesOrNo{
+                cursor: pointer;
+                img{padding: 0 10px;}
+            }
+        }
+
     }
 }
 

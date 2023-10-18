@@ -165,8 +165,13 @@ const getFile = async function(){
                 </div>
                 {
                   lines.length <= 0 ?
-                  <div className={main.todya_ab_right2}> 아직 작성 된 한줄 평이 없습니다. <p className={main.p2} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>오늘의 한줄평 더보기 ▶</p></div>
-                  
+                  <div className={main.todya_ab_right2}> 
+                  <figure className={main.todya_ab_right2_box}><img src='/img/main/today_box.png' alt=''/></figure>
+                  <div className={main.todya_ab_right2_txt}>
+                        <span> Nodata </span>
+                        <span onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>한줄평 작성 ▶</span>
+                      </div>
+                  </div>                  
                   :
                   lines.slice(0,2).map(v=>(
                     <div className={main.todya_ab_right2} key={v.num}>

@@ -2,7 +2,7 @@ import { qe } from '../../db';
 
 export async function GET(req) {
     let getNum = req.nextUrl.searchParams.get('id')
-    let data = await qe(`SELECT num,path,answer,an_id,an_icon,an_nick from dm_borad where num=${getNum}`);
+    let data = await qe(`SELECT * from dm_borad where num=${getNum}`);
     return Response.json(data);
 }
 

@@ -102,7 +102,7 @@ export default function page() {
                     <img className={style.cage} src='/img/board/list/listPack.png' />
                     <img className={style.mon} src={digimon.path}/>
                   </div>
-                </Link>
+                
                 <div className={style.nameWhole}>
                   <div className={style.nameWrap}>
                     <img className={style.namePlate} src='/img/board/list/eachListNametag.png' />
@@ -118,7 +118,7 @@ export default function page() {
                     </div>
                   </div>
                 </div>
-
+                </Link>
               </li>
             ))
           }

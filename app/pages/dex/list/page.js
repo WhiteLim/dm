@@ -171,12 +171,12 @@ export default function Page() {
                                             <div className={li.digimon}>
                                                 <img src={v.image} className={`${li.digi_picture} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Digimon Image" />
                                                 <p>
-                                                    <img src='/img/detail/mask.png' className={`${li.mask} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Mask" />
+                                                    <img src={'/img/detail/mask.png'} className={`${li.mask} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Mask" />
                                                 </p>
                                             </div>
                                         </Link>
                                         <Link href={{ pathname: '../dex/detail', query: { name: v.name } }} className={li.digi_name}>
-                                            <img src='/img/detail/name_box.png' alt="Name Box" />
+                                            <img src={'/img/detail/name_box.png'} alt="Name Box" />
                                             <span>{v.name}</span>
                                         </Link>
                                     </div>

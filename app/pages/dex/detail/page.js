@@ -33,22 +33,22 @@ export default function page() {
         const mb = await user_get()
         setRk(mb.rk.data)
         setMember(mb.data);
-        dglike();
-        dgch();
-        line();
     }
-    async function line(){
+    async function line() {
         const line = await axios.get(`/api/line?dg_id=${idParam}`);
         setReviewText(line.data)
     }
-    async function dglike(){
+    async function dglike() {
         const lik = await axios.get(`/api/dex/detail/like?num=${idParam}`)
         setLikecnt(lik.data)
     }
 
     useEffect(() => {
         fetchData()
-    }, []);
+        dglike();
+        dgch();
+        line();
+    }, [idParam]);
 
     // 버튼 클릭시 모달 버튼 클릭 유무를 설정하는 state 함수
     const clickModal = (des) => {
@@ -78,6 +78,10 @@ export default function page() {
     const data_input = async (e) => {
         e.preventDefault();
         const title = e.target.title.value;
+        if(title == '') {
+            alert("한줄평을 작성하세요");
+            return false;
+        }
         const date = new Date();
         let y = date.getFullYear();
         let m = date.getMonth() + 1;
@@ -88,14 +92,15 @@ export default function page() {
         line()
         //setReviewText([...reviewText, value.search]);
     }
-    const like =async () => {
-        const dd = {idParam,id:member.mb_id}
-        await axios.post(`/api/dex/detail/like`,dd)
+    
+    const like = async () => {
+        const dd = { idParam, id: member.mb_id }
+        await axios.post(`/api/dex/detail/like`, dd)
         dglike()
     }
 
 
-    async function dgch(){
+    async function dgch() {
         const mb_id = sessionStorage.getItem('loginstate');
         const ch = await axios.get(`/api/dex/detail/catch?dg_id=${idParam}&mb_id=${mb_id}`)
         setDg(ch.data);
@@ -109,9 +114,9 @@ export default function page() {
     }
 
     useEffect(() => {
-        if(!idParam) {
+        if (!idParam) {
             history.back();
-        }else {
+        } else {
             detailData()
         }
     }, [idParam])
@@ -125,11 +130,11 @@ export default function page() {
     }
 
     const performAction = async () => {
-        if(dg === false) {
+        if (dg === false) {
             let isSuccess = Math.floor(Math.random() * 100)
-            if(isSuccess <= 20) {
-                const send = {idParam,id:member.mb_id}
-                await axios.post(`/api/dex/detail/catch`,send)
+            if (isSuccess <= 20) {
+                const send = { idParam, id: member.mb_id }
+                await axios.post(`/api/dex/detail/catch`, send)
                 setDg(true)
                 alert('나이스! 포획성공!');
             } else {
@@ -250,22 +255,22 @@ export default function page() {
                     <h3>유저 한줄 평</h3>
                     <ul>
                         {
-                        reviewText.length <= 0 ? <li><p> 작성 된 한줄평이 없습니다. </p></li>
-                        :
-                        reviewText.map((item, key) => (
-                            <li className={de.review_list} key={item.num}>
-                                <div>
-                                    <p className={de.review_text}>{item.content}</p>
-                                    <div>
-                                        <div className={de.user_text}>
-                                            <img src={`/img/main/icon/${item.wr_icon}.png`} />
-                                            <p>{item.wr_nick}</p>
+                            reviewText.length <= 0 ? <li className={de.no_review_list}><p> 작성 된 한줄평이 없습니다. </p></li>
+                                :
+                                reviewText.map((item, key) => (
+                                    <li className={de.review_list} key={item.num}>
+                                        <div>
+                                            <p className={de.review_text}>{item.content}</p>
+                                            <div>
+                                                <div className={de.user_text}>
+                                                    <img src={`/img/main/icon/${item.wr_icon}.png`} />
+                                                    <p>{item.wr_nick}</p>
+                                                </div>
+                                                <span>[2023.10.12]</span>
+                                            </div>
                                         </div>
-                                        <span>[2023.10.12]</span>
-                                    </div>
-                                </div>
-                            </li>
-                        ))
+                                    </li>
+                                ))
                         }
                     </ul>
                 </div>
@@ -374,35 +379,35 @@ export default function page() {
                             }}>
                             {
                                 data.nextEvolutions.length === 0
-                                ? <div className={de.no_data}>No data</div>
-                                : data.nextEvolutions.map((nextEvolutions, key_6) => (
-                                    <SwiperSlide key={key_6}>
-                                        <div className={de.list_box}>
-                                            <Link href={{
-                                                pathname: '../dex/detail',
-                                                query: {
-                                                    id: nextEvolutions.id,
-                                                }
-                                            }} className={de.Evolution_list}>
-                                                <div className={de.Evolution_data}>
-                                                    <div className={de.picture}>
-                                                        <img src={'/img/detail/digi_box.png'} />
-                                                        <div className={de.digimon}>
-                                                            <img src={nextEvolutions.image} onError={handleImgError} className={de.digi_picture} />
-                                                            <p>
-                                                                <img src={'/img/detail/mask.png'} className={de.mask} />
-                                                            </p>
+                                    ? <div className={de.no_data}>No data</div>
+                                    : data.nextEvolutions.map((nextEvolutions, key_6) => (
+                                        <SwiperSlide key={key_6}>
+                                            <div className={de.list_box}>
+                                                <Link href={{
+                                                    pathname: '../dex/detail',
+                                                    query: {
+                                                        id: nextEvolutions.id,
+                                                    }
+                                                }} className={de.Evolution_list}>
+                                                    <div className={de.Evolution_data}>
+                                                        <div className={de.picture}>
+                                                            <img src={'/img/detail/digi_box.png'} />
+                                                            <div className={de.digimon}>
+                                                                <img src={nextEvolutions.image} onError={handleImgError} className={de.digi_picture} />
+                                                                <p>
+                                                                    <img src={'/img/detail/mask.png'} className={de.mask} />
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <div className={de.digi_name}>
+                                                            <img src={'/img/detail/name_box.png'} />
+                                                            <span>{nextEvolutions.digimon}</span>
                                                         </div>
                                                     </div>
-                                                    <div className={de.digi_name}>
-                                                        <img src={'/img/detail/name_box.png'} />
-                                                        <span>{nextEvolutions.digimon}</span>
-                                                    </div>
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    </SwiperSlide>
-                                ))
+                                                </Link>
+                                            </div>
+                                        </SwiperSlide>
+                                    ))
                             }
                         </Swiper>
                     </div>

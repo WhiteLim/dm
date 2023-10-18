@@ -42,7 +42,7 @@ export default function page() {
     const req = await axios.get(`/api/borad/view/wrong?id=${idParam}`)
     setAnsData(req.data)
   }
-  
+  console.log(data);
   //~~~~~~~~~캐치마인드 크기 조절~~~~~~~~~
   const canvasRef = useRef(null);
   let [canvasWidth, setCanvasWidth]= useState();
@@ -93,15 +93,36 @@ export default function page() {
     }
 
     if(answerInput == data.answer){
-      console.log('정답');
-      axios.post('/api/borad/view',send)
+      youOanswer();
+      axios.post('/api/borad/view',send);
     }else{
-      console.log('오답');
-      axios.post('/api/borad/view/wrong',send)
+      youXanswer();
+      axios.post('/api/borad/view/wrong',send);
     }
   };
 
-  //오답박스 열기
+  //정답오답 모달창
+  const [Oanswer, setOanswer] = useState(true);
+  // const [Oanswer, setOanswer] = useState(false);
+  const [Xanswer, setXanswer] = useState(false);
+
+  //정답오답 함수
+  const youOanswer = ()=>{
+    setOanswer(true);
+    document.body.style.overflow = 'hidden';
+    setTimeout(function () {
+    }, 3000);
+  };
+  const youXanswer = ()=>{
+    setXanswer(true);
+    document.body.style.overflow = 'hidden';
+  };
+  
+  const goList = ()=>{
+    window.location.href = '/pages/borad/list'
+  };
+
+  //오답리스트 박스 열기
   const [openBigWrong,setOpenBigWrong]=useState(false);
   const [openSmallWrong,setOpenSmallWrong]=useState(true);
 
@@ -209,11 +230,11 @@ export default function page() {
         )
       }
 
-      { ansData.length > 5 && openBigWrong && (
+      { ansData.length > 2 && openBigWrong && (
           <div className={style.bigbox}>
             <ul className={style.bigboxInner}>
               {
-                ansData.slice(0,5).map((comment)=>(
+                ansData.map((comment)=>(
                   <li className={style.comment} key={comment.num}>
                     <img src={`/img/main/icon/${comment.wr_icon}.png`}/>
                     <span>[{comment.wr_nick}]: {comment.answer}</span>
@@ -224,10 +245,67 @@ export default function page() {
           </div>
         )
       }
-        
       </section>
 
       <Footer/>
+
+      {/* 정답일때*/}
+      {Oanswer && (
+        <section className={style.Oanswer}>
+          <img className={style.modalBg} src='/img/board/view/OanswerBg.png'/>
+          <div className={style.modalInner}>
+            <div className={style.rkName}>
+              <figure className={style.iconNick}>
+                <img src={`/img/main/icon/${member.mb_icon}.png`}/>
+                <figcaption>{member.mb_nick}</figcaption>
+              </figure>
+              <p>[Rk.{rk}]</p>
+            </div>
+            <div className={style.youGotDM}>
+              <li className={style.eachDigimon}>
+
+                <div className={style.cageWhole}>
+                  <img className={style.cage} src='/img/board/list/listPack.png' />
+                  <img className={style.mon} src={data.path}/>
+                </div>
+                
+                <div className={style.nameWhole}>
+                  <div className={style.nameWrap}>
+                    <img className={style.namePlate} src='/img/board/list/eachListNametag.png' />
+                    
+                    <div className={style.nameInner}>
+                      <img className={style.smallFace} src={`/img/main/face/${data.wr_img}.png`}/>
+                      <div className={style.textwrap}>
+                        <div className={style.iconNameLine}>
+                          <img src={`/img/main/icon/${data.wr_icon}.png`}/>
+                          <p className={style.name}>{data.answer}</p>
+                        </div>
+                        <span className={style.fromWho}>님의 D.M</span>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </li>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 오답일때*/}
+      {Xanswer && (
+        <section className={style.Xanswer}>
+          <img className={style.modalBg} src='/img/board/view/XanswerBg.png'/>
+          <div className={style.askRetry}>
+            <p className={style.askText}>PLAY AGAIN?</p>
+            <div className={style.yesOrNo}>
+              <img className={style.askBtn} onClick={ ()=>setXanswer(false)} src='/img/board/view/XanswerYes.png'/>
+              <img className={style.askBtn} onClick={ goList } src='/img/board/view/XanswerNo.png'/>
+            </div>
+          </div>
+        </section>
+      )}
     </article>
   )
 }
