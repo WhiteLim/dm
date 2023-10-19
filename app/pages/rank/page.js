@@ -31,7 +31,7 @@ export default function page() {
     ranking()
   },[]);
 
-  if(!member) return <Lodding />
+  if(!member || !rk || !rrk) return <Lodding />
   
   return (
     <div className={rank.rank_wrap}>
