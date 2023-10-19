@@ -29,6 +29,7 @@ export default function page() {
   const [likecnt, setLikecnt] = useState();
   const [dg, setDg] = useState();
   const [btnname, setBtnname] = useState('포획하기');
+  const [likes, setLikes] = useState('like_1');
 
   //alert창
   const [altext, setAltext] = useState();
@@ -49,6 +50,17 @@ export default function page() {
   async function dglike() {
     const lik = await axios.get(`/api/dex/detail/like?num=${idParam}`)
     setLikecnt(lik.data)
+    mylike()
+  }
+
+  async function mylike() {
+    let mb_id = sessionStorage.getItem('loginstate');
+    const mk = await axios.get(`/api/dex/detail/mylike?num=${idParam}&mb_id=${mb_id}`)
+    if(mk.data > 0) {
+      setLikes('like_2')
+    }else{
+      setLikes('like_1')
+    }
   }
 
   useEffect(() => {
@@ -57,6 +69,8 @@ export default function page() {
     dgch();
     line();
     setBtnname('포획하기')
+    setLikes('like_1')
+    mylike() 
   }, [idParam]);
 
   // 버튼 클릭시 모달 버튼 클릭 유무를 설정하는 state 함수
@@ -200,7 +214,7 @@ export default function page() {
               <div className={de.left_data}>
                 <p className={de.like} onClick={like} >
                   <img src={'/img/detail/like_box.png'} />
-                  <img src={'/img/detail/like_1.png'} className={de.likes} />
+                  <img src={`/img/detail/${likes}.png`} className={de.likes} />
                   <span>{likecnt}</span>
                 </p>
                 <div className={de.dg_img}>
@@ -328,7 +342,7 @@ export default function page() {
                           <img src={`/img/main/icon/${item.wr_icon}.png`} />
                           <p>{item.wr_nick}</p>
                         </div>
-                        <span>[2023.10.12]</span>
+                        <span>[{item.wr_date}]</span>
                       </div>
                     </div>
                   </li>
