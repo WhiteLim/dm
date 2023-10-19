@@ -441,6 +441,9 @@
                 }
             }
         }
+        .skill_info_mobile{
+            display: none;
+        }
         .dg_review {
             width: 38.125rem;
             height: 21.875rem;
@@ -1154,6 +1157,7 @@
                 }
             }
             .skill_info {
+                display: none;
                 width: 90vw;
                 height: 30vh;
                 margin: 0 auto;
@@ -1210,6 +1214,9 @@
                         }
                     }
                 }
+            }
+            .skill_info_mobile{
+                display: block;
             }
             .dg_review {
                 width: 90vw;
@@ -1912,7 +1919,7 @@
                     p {
                         padding: 1.5rem 0;
                         width: 8.9375rem;
-                        margin: 0.975rem auto;
+                        margin: 1.975rem auto;
                         color: #092b4f;
                         letter-spacing: 0.125rem;
                         font-size: 1.125rem;
@@ -1951,6 +1958,7 @@
                 }
             }
             .skill_info {
+                display: none;
                 width: 90vw;
                 height: 25vh;
                 margin: 0 auto;

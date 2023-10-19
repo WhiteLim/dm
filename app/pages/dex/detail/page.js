@@ -269,6 +269,7 @@ export default function page() {
                         </div>
                     </div>
                 </div>
+                <div className={de.skill_info_mobile}></div>
                 <div className={de.dg_review}>
                     <h3>유저 한줄 평</h3>
                     <ul>

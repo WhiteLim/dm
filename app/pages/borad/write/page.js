@@ -263,7 +263,6 @@ export default function page() {
   if(!member || !canvasRef) return <Lodding />
   return (
     <article className={style.board_write}>
-      {/* <LoginCheck />  */}
       <header>
         <figure className={style.logo}><img src='/img/board/write/logo.png'/></figure>
         <div className={style.profile} >

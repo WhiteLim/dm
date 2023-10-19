@@ -31,6 +31,11 @@ const nav = useRouter();
 //get으로 DB정보 가져오기
 const [ddata,setDdata] = useState([]);
 
+//alert창 
+const [isAlertOpen, setIsAlertOpen] = useState(false);
+const [altext, setAltext] = useState();
+
+
 async function fetchData() {
     const mb = await user_get()
     setRk(mb.rk.data)
@@ -71,13 +76,32 @@ const getFile = async function(){
     getFile(); getdigimon()
   },[]);
   
+
+  //alert창 열고 닫기
+  const alertOpen = (text) =>{
+    console.log('a');
+    setAltext(text)
+    setIsAlertOpen(true);
+  };
+
+  const alertClose = () =>{
+    setIsAlertOpen(false);
+    if(altext == "검색할 디지몬을 입력해주세요."){
+      location.reload();
+    }
+  };
   const moving = (link)=>{
     nav.push(link)
   }
+console.log(isAlertOpen);
+
   const ser = (e)=>{
     e.preventDefault();
     const search = e.target.search.value;
-    if(search == '') { alert("검색할 디지몬을 입력해주세요."); return false; }
+    if(search == '') { 
+      alertOpen("검색할 디지몬을 입력해주세요."); 
+      return false; 
+    }
     nav.push(`/pages/dex/list?mode=search&search=${search}`);
   }
 
@@ -106,7 +130,7 @@ const getFile = async function(){
         <div className={main.search_input}>
           <div className={main.input}>
             <form className={main.input_form} onSubmit={ser}>
-              <input type="text" name='search' pattern="[A-Za-z]+" className={main.inputs} placeholder='디지몬을 검색해보세요.(영문검색)' ref={input}/>
+              <input type="text" name='search' pattern="[A-Za-z]+" className={main.inputs} placeholder='디지몬을 검색해보세요.(영문검색)' ref={input}  />
               <figure><input type="submit" className={main.fig_input} value="" /></figure>
             </form>
           </div>
@@ -227,9 +251,9 @@ const getFile = async function(){
                     </div>
                     <div className={main.today_dm_info_wrap}>
                       <div className={main.today_dm_info}>
-                        <figure className={main.today_dm_face}><img src={`/img/main/face/${v.cc}.png`} alt=''/></figure>
+                        <figure className={main.today_dm_face}><img src={`/img/main/face/${v.wr_icon}.png`} alt=''/></figure>
                         <div className={main.today_dm_infos}>
-                          <figure className={main.today_dm_info_icon}><img src={`/img/main/icon/${v.img}.png`} alt=''/></figure>
+                          <figure className={main.today_dm_info_icon}><img src={`/img/main/icon/${v.wr_img}.png`} alt=''/></figure>
                           <span>{v.title}</span>
                         </div>
                         <p>님의 D.M</p>
@@ -240,6 +264,17 @@ const getFile = async function(){
               }
             </Swiper>
           </div>
+        </div>
+      <div className={main.alert_modal} onClick={() => openAlert()}>
+        {isAlertOpen && (
+          <form className= {main.alert_warning}>
+          <img src='/img/member/join/modal.png' alt=''/>
+          <div className={main.alert_text}>
+          <p>{altext}</p>
+          <input type='image' src='/img/member/mypage/ok.png' className = {main.alert_btn}  onClick={() => alertClose()}/>
+          </div>
+        </form>
+        )}
         </div>
       </div>
       <Footer />

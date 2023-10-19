@@ -4,7 +4,7 @@ import li from './list.module.scss';
 import axios from 'axios';
 import Footer from '@/app/comp/Footer';
 import Link from 'next/link';
-import {user_get} from '../../../comp/member/Login'
+import { user_get } from '../../../comp/member/Login'
 import { useSearchParams } from 'next/navigation';
 import Lodding from '@/app/comp/Lodding';
 import { useRouter } from 'next/navigation';
@@ -17,10 +17,10 @@ export default function Page() {
     const [level, setLevel] = useState(['Baby I', 'Baby II', '', '']);
     const [searchText, setSearchText] = useState('');
     const [btnClicked, setBtnClicked] = useState(false);
-    const [member,setMember] = useState();
-    const [rk,setRk] = useState();
-    const [tt,setTt] = useState(false);
-    const [mdg,setMdg] = useState();
+    const [member, setMember] = useState();
+    const [rk, setRk] = useState();
+    const [tt, setTt] = useState(false);
+    const [mdg, setMdg] = useState();
     const params = useSearchParams();
     const btn = useRef();
     let mode = params.get('mode');
@@ -31,8 +31,8 @@ export default function Page() {
         const mb_id = sessionStorage.getItem('loginstate');
         const gdg = await axios.get(`/api/member/mydigimon?id=${mb_id}`)
         setMdg(gdg.data);
-      }
-    
+    }
+
 
     async function fetchData() {
         const mb = await user_get()
@@ -40,10 +40,10 @@ export default function Page() {
         setMember(mb.data);
     }
 
-    useEffect( ()=>{
+    useEffect(() => {
         fetchData();
         getdigimon();
-    },[]);
+    }, []);
 
 
     const urls = level.map((lvl) => `${baseURL}?level=${lvl}&pageSize=1422`);
@@ -67,9 +67,9 @@ export default function Page() {
         setPage(page + 10);
     };
     const [bnum, setBnum] = useState(0);
-    const setLevelByType = (levels,eq) => {
-        if(mode == 'search'){ 
-            setTt(true) 
+    const setLevelByType = (levels, eq) => {
+        if (mode == 'search') {
+            setTt(true)
             btn.current.childNodes[0].classList.remove(li.active)
             btn.current.childNodes[1].classList.remove(li.active)
             btn.current.childNodes[2].classList.remove(li.active)
@@ -82,10 +82,10 @@ export default function Page() {
         setPage(10);
     };
     useEffect(() => {
-        if(mode == 'search' && tt ==false){
+        if (mode == 'search' && tt == false) {
             setSearchText(keyword)
             find();
-        }else {
+        } else {
             getContents();
         }
     }, [level]);
@@ -98,7 +98,7 @@ export default function Page() {
         find()
     }
 
-    async function find(){
+    async function find() {
         const newData = await axios.get(`${baseURL}?pageSize=1422`)
         const searchTextLower = searchText.toLowerCase() == '' ? keyword.toLowerCase() : searchText.toLowerCase();
         const filterName = newData.data.content.filter(item =>
@@ -116,11 +116,11 @@ export default function Page() {
         }
     }
     const nav = useRouter();
-    const moving = (link)=>{
+    const moving = (link) => {
         nav.push(link)
-      }
+    }
 
-      const handleImgError = (e) => {
+    const handleImgError = (e) => {
         e.target.src = 'https://digimon-api.com/images/digimon/w/Earthdramon.png';
     }
 
@@ -131,15 +131,15 @@ export default function Page() {
             <div className={li.user_info}>
                 <p><img src={'/img/detail/logo.png'} alt="Logo" /></p>
                 <div className={li.info_box}>
-                    <div className={li.inner_box} onClick={()=>{ moving('/pages/member/mypage') }}>
+                    <div className={li.inner_box} onClick={() => { moving('/pages/member/mypage') }}>
                         <span>[Rk.{rk}]</span>
                         <div>
-                        <img src={`/img/main/icon/${member.mb_icon}.png`} alt=''/>
+                            <img src={`/img/main/icon/${member.mb_icon}.png`} alt='' />
                             <p>{member.mb_nick}</p>
                         </div>
                     </div>
                     <div className={li.user_profile}>
-                        <p><img src={`/img/main/face/${member.mb_img}.png`} alt=''/></p>
+                        <p><img src={`/img/main/face/${member.mb_img}.png`} alt='' /></p>
                     </div>
                 </div>
             </div>
@@ -163,15 +163,15 @@ export default function Page() {
             </div>
             <div className={li.data_list}>
                 <div className={`${li.btn_list}${btnClicked ? '_clicked' : ''}`} ref={btn}>
-                    <div onClick={() => setLevelByType(['Baby I' || 'Baby II' || '' || ''],0)}
+                    <div onClick={() => setLevelByType(['Baby I' || 'Baby II' || '' || ''], 0)}
                         className={`${li.btn} ${li.active}`}>
                         <p>유년기</p>
                     </div>
-                    <div onClick={() => setLevelByType(['Child' || 'Adult' || 'Armor' || ''],1)}
+                    <div onClick={() => setLevelByType(['Child' || 'Adult' || 'Armor' || ''], 1)}
                         className={li.btn}>
                         <p>성장기</p>
                     </div>
-                    <div onClick={() => setLevelByType(['Perfect' || 'Ultimate' || 'Hybrid' || 'Super Ultimate'],2)}
+                    <div onClick={() => setLevelByType(['Perfect' || 'Ultimate' || 'Hybrid' || 'Super Ultimate'], 2)}
                         className={li.btn}>
                         <p>완전체</p>
                     </div>
@@ -187,7 +187,7 @@ export default function Page() {
                                             query: {
                                                 id: v.id,
                                             }
-                                        }}className={li.picture}>
+                                        }} className={li.picture}>
                                             <img src={'/img/detail/digi_box.png'} alt="Digi Box" />
                                             <div className={li.digimon}>
                                                 <img src={v.image} onError={handleImgError} className={`${li.digi_picture} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Digimon Image" />
@@ -203,8 +203,8 @@ export default function Page() {
                                     </div>
                                 </li>
                             ))}
-                            <div className={li.button}>
-                                <span onClick={more}> 더보기 </span>
+                            <div className={li.button} onClick={more}>
+                                <span> 더보기 </span>
                             </div>
                         </ul>
                     </div>

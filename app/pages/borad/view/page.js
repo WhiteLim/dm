@@ -48,22 +48,21 @@ export default function page() {
   const canvasRef = useRef(null);
   let [canvasWidth, setCanvasWidth]= useState();
 
+  function resizeCanvas() {
+    const canvas = canvasRef.current;
+    if(canvas != null){
+      const container = document.body;
+      const width = container.clientWidth;
+      canvas.width = width >= 600 ? 489 : width*0.7;
+      canvas.height = width >= 639 ? 429 : canvasWidth*0.877;
+      setCanvasWidth(canvas.clientWidth);
+
+    }
+  }
   useEffect(()=>{
-    setTimeout(() => {
-      function resizeCanvas() {
-          const canvas = canvasRef.current;
-          const container = document.body;
-          const width = container.clientWidth;
-          canvas.width = width >= 600 ? 489 : width*0.7;
-          canvas.height = width >= 639 ? 429 : canvasWidth*0.877;
-          setCanvasWidth(canvas.clientWidth);
-        }
-    
-        window.addEventListener('resize',resizeCanvas)
-    
-        resizeCanvas();
-    }, 500);
-  },[canvasWidth])
+      window.addEventListener('resize',resizeCanvas)
+      resizeCanvas();
+  },[canvasWidth,member])
 
   //답 입력
   const [answerInput, setAnswerInput] = useState(''); 
@@ -103,23 +102,35 @@ export default function page() {
   };
 
   //정답오답 모달창
-  const [Oanswer, setOanswer] = useState(true);
-  // const [Oanswer, setOanswer] = useState(false);
+  // const [Oanswer, setOanswer] = useState(true);
+  const [Oanswer, setOanswer] = useState(false);
   const [Xanswer, setXanswer] = useState(false);
 
-  //정답오답 함수
+  //정답 함수
   const youOanswer = ()=>{
     setOanswer(true);
     document.body.style.overflow = 'hidden';
+    
+    const myid = member.mb_id;
+    const newCount = (member.mb_count)+1;
+    const sendScore = {myid, newCount};
+    axios.post('/api/borad/view/score',sendScore);
+
     setTimeout(function () {
+      window.location.href = '/pages/borad/list'
     }, 3000);
   };
+  //오답 함수
   const youXanswer = ()=>{
     setXanswer(true);
     document.body.style.overflow = 'hidden';
   };
-  
-  const goList = ()=>{
+  //오답에서 예/아니오
+  const youSaidYes = function(){
+    setXanswer(false);
+    window.location.reload();
+  }
+  const youSaidNo = ()=>{
     window.location.href = '/pages/borad/list'
   };
 
@@ -142,7 +153,7 @@ export default function page() {
       nav.push(link)
     }
 
-  if(!member || !data || !ansData) return <Lodding />
+  if(!member || !data || !ansData || !canvasRef) return <Lodding />
   return (
     <article className={style.board_view}>
       <header>
@@ -269,7 +280,6 @@ export default function page() {
             </div>
             <div className={style.youGotDM}>
               <li className={style.eachDigimon}>
-
                 <div className={style.cageWhole}>
                   <img className={style.cage} src='/img/board/list/listPack.png' />
                   <img className={style.mon} src={data.path}/>
@@ -284,17 +294,22 @@ export default function page() {
                       <div className={style.textwrap}>
                         <div className={style.iconNameLine}>
                           <img src={`/img/main/icon/${data.wr_icon}.png`}/>
-                          <p className={style.name}>{data.answer}</p>
+                          <p className={style.name}>{data.title}</p>
                         </div>
                         <span className={style.fromWho}>님의 D.M</span>
                       </div>
                     </div>
-
+      
                   </div>
                 </div>
-
               </li>
+              
+              <div className={style.answerPlate}>
+                <img className={style.plateBg} src='/img/board/view/OanswerName.png' />
+                <p className={style.answerName}>{data.answer}</p>
+              </div>
             </div>
+            <p className={style.fire}><img src='/img/board/view/congFire.gif'/></p>
           </div>
         </section>
       )}
@@ -306,8 +321,8 @@ export default function page() {
           <div className={style.askRetry}>
             <p className={style.askText}>PLAY AGAIN?</p>
             <div className={style.yesOrNo}>
-              <img className={style.askBtn} onClick={ ()=>setXanswer(false)} src='/img/board/view/XanswerYes.png'/>
-              <img className={style.askBtn} onClick={ goList } src='/img/board/view/XanswerNo.png'/>
+              <img className={style.askBtn} onClick={ youSaidYes } src='/img/board/view/XanswerYes.png'/>
+              <img className={style.askBtn} onClick={ youSaidNo } src='/img/board/view/XanswerNo.png'/>
             </div>
           </div>
         </section>
