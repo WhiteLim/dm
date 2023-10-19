@@ -43,7 +43,6 @@ export default function page() {
     const req = await axios.get(`/api/borad/view/wrong?id=${idParam}`)
     setAnsData(req.data)
   }
-  console.log(data);
   //~~~~~~~~~캐치마인드 크기 조절~~~~~~~~~
   const canvasRef = useRef(null);
   let [canvasWidth, setCanvasWidth]= useState();
@@ -102,7 +101,6 @@ export default function page() {
   };
 
   //정답오답 모달창
-  // const [Oanswer, setOanswer] = useState(true);
   const [Oanswer, setOanswer] = useState(false);
   const [Xanswer, setXanswer] = useState(false);
 
@@ -153,6 +151,8 @@ export default function page() {
       nav.push(link)
     }
 
+
+
   if(!member || !data || !ansData || !canvasRef) return <Lodding />
   return (
     <article className={style.board_view}>
@@ -199,14 +199,26 @@ export default function page() {
           {
             !data?.an_id ?  
             <div className={style.wrapAnswer}>
-              <input className={style.answerInput} type='text' 
-                placeholder='정답을 입력하세요'
-                onChange={(e)=> setAnswerInput(e.target.value)}
-                onKeyPress={inputKeyPress}
-              />
-              <div className={style.inputBtn} onClick={answerCompare}>
-                <img src='/img/board/view/inputBtn.png'/>
-              </div>
+              {
+                (member.mb_id == data.wr_id) ?
+                  <input className={style.answerInput} type='text' 
+                    placeholder='자신의 D.M은 풀 수 없습니다' disabled
+                  />
+                :
+                <input className={style.answerInput} type='text' 
+                  placeholder='정답을 입력하세요'
+                  onChange={(e)=> setAnswerInput(e.target.value)}
+                  onKeyPress={inputKeyPress}
+                />
+              }
+              {
+                (member.mb_id == data.wr_id) ?
+                <></>
+                :
+                <div className={style.inputBtn} onClick={answerCompare}>
+                  <img src='/img/board/view/inputBtn.png'/>
+                </div>
+              }
             </div>
           :
             <div className={style.correct}>

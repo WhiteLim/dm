@@ -58,10 +58,14 @@ export default function page() {
         nav.push(link)
     }
 
-    const removedg = (id) => {
+    const removedg =async (id) => {
+        setList([])
         const send = { mb_id: member.mb_id, dg_id: id }
-        axios.post('/api/member/mydigimon/rm', send)
-        getdigimon()
+        const rmdata = await axios.post('/api/member/mydigimon/rm', send)
+        if (rmdata.data) {
+            digimonlist(rmdata.data)
+        }
+
     }
 
     if (!data || !member || !list) return <Lodding />

@@ -50,6 +50,7 @@ export default function page() {
         dglike();
         dgch();
         line();
+        setBtnname('포획하기')
     }, [idParam]);
 
     // 버튼 클릭시 모달 버튼 클릭 유무를 설정하는 state 함수
@@ -80,7 +81,7 @@ export default function page() {
     const data_input = async (e) => {
         e.preventDefault();
         const title = e.target.title.value;
-        if(title == '') {
+        if (title == '') {
             alert("한줄평을 작성하세요");
             return false;
         }
@@ -89,12 +90,12 @@ export default function page() {
         let m = date.getMonth() + 1;
         let d = date.getDate();
         let fulldate = `${y}.${m}.${d}`;
-        const send = {title,fulldate,id:member.mb_id,idParam,icon:member.mb_icon,nick:member.mb_nick}
-        await axios.post('/api/line',send);
+        const send = { title, fulldate, id: member.mb_id, idParam, icon: member.mb_icon, nick: member.mb_nick }
+        await axios.post('/api/line', send);
         line()
         //setReviewText([...reviewText, value.search]);
     }
-    
+
     const like = async () => {
         const dd = { idParam, id: member.mb_id }
         await axios.post(`/api/dex/detail/like`, dd)
@@ -106,7 +107,7 @@ export default function page() {
         const mb_id = sessionStorage.getItem('loginstate');
         const ch = await axios.get(`/api/dex/detail/catch?dg_id=${idParam}&mb_id=${mb_id}`)
         setDg(ch.data);
-        if(ch.data == true) {
+        if (ch.data == true) {
             setBtnname('포획완료')
         }
     }
@@ -159,7 +160,7 @@ export default function page() {
             <div className={de.detail_page}>
                 <div className={de.user_info}>
                     <p><img src={'/img/detail/logo.png'} /></p>
-                    <div className={de.info_box} onClick={()=>{ moving('/pages/member/mypage') }}>
+                    <div className={de.info_box} onClick={() => { moving('/pages/member/mypage') }}>
                         <div className={de.inner_box} >
                             <span>[Rk.{rk}]</span>
                             <div>
@@ -201,17 +202,17 @@ export default function page() {
                                         {
                                             data.levels.map((level, key_1) => (
                                                 <span key={key_1}>{
-                                                    level.level == 'Baby I' ? '유아기' 
-                                                    : level.level =='Baby II' ? '유년기'
-                                                    : level.level =='Child' ? '성장기'
-                                                    : level.level =='Adult' ? '성숙기'
-                                                    : level.level =='Perfect' ? '완전체'
-                                                    : level.level =='Ultimate' ? '궁극체'
-                                                    : level.level =='Super Ultimate' ? '초 궁극체'
-                                                    : level.level == 'Armor' ? '아머체'
-                                                    : level.level == 'Hybrid' ? '하이브리드'
-                                                    : level.level
-                                                    }</span>
+                                                    level.level == 'Baby I' ? '유아기'
+                                                        : level.level == 'Baby II' ? '유년기'
+                                                            : level.level == 'Child' ? '성장기'
+                                                                : level.level == 'Adult' ? '성숙기'
+                                                                    : level.level == 'Perfect' ? '완전체'
+                                                                        : level.level == 'Ultimate' ? '궁극체'
+                                                                            : level.level == 'Super Ultimate' ? '초 궁극체'
+                                                                                : level.level == 'Armor' ? '아머체'
+                                                                                    : level.level == 'Hybrid' ? '하이브리드'
+                                                                                        : level.level
+                                                }</span>
                                             ))
                                         }
                                     </div>
@@ -269,7 +270,29 @@ export default function page() {
                         </div>
                     </div>
                 </div>
-                <div className={de.skill_info_mobile}></div>
+                <div className={de.skill_info_mobile}>
+                    <div className={de.skill_deco}>
+                        <div className={de.title}>
+                            <div className={de.digivice_m}>
+                                <img src={'/img/detail/digivice.gif'} />
+                            </div>
+                            <p>SKILLS</p>
+                        </div>
+                    </div>
+                    <div className={de.skill_txt_m}>
+                        <ul>
+                            {
+                                data.skills.length === 0
+                                    ? <li className={de.no_data_m}><p>No data</p></li>
+                                    : data.skills.slice(0, 4).map((skill, key_3) => (
+                                        <li key={key_3} className={de.skill_data_m}>
+                                            <span>{skill.skill}</span>
+                                        </li>
+                                    ))
+                            }
+                        </ul>
+                    </div>
+                </div>
                 <div className={de.dg_review}>
                     <h3>유저 한줄 평</h3>
                     <ul>
@@ -342,7 +365,7 @@ export default function page() {
                                                 <Link href={{
                                                     pathname: '../dex/detail',
                                                     query: {
-                                                        id: !priorEvolutions.id ? idParam :  priorEvolutions.id,
+                                                        id: !priorEvolutions.id ? idParam : priorEvolutions.id,
                                                     }
                                                 }} className={de.Evolution_list} >
                                                     {priorEvolutions.id == priorEvolutions.id ? (
@@ -351,7 +374,7 @@ export default function page() {
                                                                 <div className={de.digimon}>
                                                                     <img src={priorEvolutions.image} onError={handleImgError} className={de.digi_picture} />
                                                                     <p>
-                                                                        <img src={'/img/detail/mask.png'} className={de.mask} />
+                                                                        <img src={'/img/detail/overview.png'} className={de.mask} />
                                                                     </p>
                                                                 </div>
                                                             </div>
@@ -414,7 +437,7 @@ export default function page() {
                                                             <div className={de.digimon}>
                                                                 <img src={nextEvolutions.image} onError={handleImgError} className={de.digi_picture} />
                                                                 <p>
-                                                                    <img src={'/img/detail/mask.png'} className={de.mask} />
+                                                                    <img src={'/img/detail/overview.png'} className={de.mask} />
                                                                 </p>
                                                             </div>
                                                         </div>

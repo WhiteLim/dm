@@ -86,9 +86,6 @@ const getFile = async function(){
 
   const alertClose = () =>{
     setIsAlertOpen(false);
-    if(altext == "검색할 디지몬을 입력해주세요."){
-      location.reload();
-    }
   };
   const moving = (link)=>{
     nav.push(link)
@@ -196,8 +193,8 @@ console.log(isAlertOpen);
                   <div className={main.todya_ab_right2}> 
                   <figure className={main.todya_ab_right2_box}><img src='/img/main/today_box.png' alt=''/></figure>
                   <div className={main.todya_ab_right2_txt}>
-                        <span> Nodata </span>
-                        <span onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>한줄평 작성 ▶</span>
+                        <span>작성된 한줄평이 없습니다.</span>
+                        <span onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>한줄평 작성하기 ▶</span>
                       </div>
                   </div>                  
                   :
@@ -209,10 +206,10 @@ console.log(isAlertOpen);
                         <figure><img src={`/img/main/icon/${v.wr_icon}.png`} alt=''/></figure>
                         <span>{v.wr_nick}</span>
                       </div>
-                      <p className={main.p2} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>오늘의 한줄평 더보기 ▶</p>
                     </div>
                   ))
                 }
+                <p className={main.p2} onClick={()=>{ moving(`/pages/dex/detail?id=${rdg.id}`) }}>오늘의 한줄평 더보기 ▶</p>
               </div>
           </div>
         </div>
@@ -265,18 +262,18 @@ console.log(isAlertOpen);
             </Swiper>
           </div>
         </div>
-      <div className={main.alert_modal} onClick={() => openAlert()}>
-        {isAlertOpen && (
-          <form className= {main.alert_warning}>
-          <img src='/img/member/join/modal.png' alt=''/>
-          <div className={main.alert_text}>
-          <p>{altext}</p>
-          <input type='image' src='/img/member/mypage/ok.png' className = {main.alert_btn}  onClick={() => alertClose()}/>
+        <div className={main.alert_modal} onChange={() => openAlert()}>
+          {isAlertOpen && (
+            <form className= {main.alert_warning}>
+            <img src='/img/member/join/modal.png' alt=''/>
+            <div className={main.alert_text}>
+            <p>{altext}</p>
+            <input type='image' src='/img/member/mypage/ok.png' className = {main.alert_btn}  onClick={() => alertClose()}/>
+            </div>
+          </form>
+          )}
           </div>
-        </form>
-        )}
         </div>
-      </div>
       <Footer />
     </div>
   )
