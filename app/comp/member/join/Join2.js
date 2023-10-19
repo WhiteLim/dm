@@ -44,12 +44,15 @@ export default function Join2({setList,setNickName,setUimg}) {
       setName(inputValue);
     }
   };
-  let n=0;
   const img = function(k){
-    elImg.current.childNodes[0].childNodes[n].childNodes[0].classList.remove(join.active)
-    elImg.current.childNodes[0].childNodes[k-1].childNodes[0].classList.add(join.active)
-    n=k-1;
-    setIi(k-1);
+    for(let i=0; i<8; i++){
+      if(i == k - 1) {
+        elImg.current.childNodes[0].childNodes[i].childNodes[0].classList.add(join.active)
+      } else {
+        elImg.current.childNodes[0].childNodes[i].childNodes[0].classList.remove(join.active)
+      }
+    }
+    setIi(k);
   }
   const con2Click = ()=>{
     let nickNames = input.current.value;

@@ -152,8 +152,8 @@ export default function Page() {
     <section className={li.list_page}>
       <div className={li.user_info}>
         <p><img src={'/img/detail/logo.png'} alt="Logo" /></p>
-        <div className={li.info_box}>
-          <div className={li.inner_box} onClick={() => { moving('/pages/member/mypage') }}>
+        <div className={li.info_box} onClick={() => { moving('/pages/member/mypage') }}>
+          <div className={li.inner_box} >
             <span>[Rk.{rk}]</span>
             <div>
               <img src={`/img/main/icon/${member.mb_icon}.png`} alt='' />

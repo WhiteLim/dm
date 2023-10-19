@@ -115,7 +115,11 @@ export default function page() {
     axios.post('/api/borad/view/score',sendScore);
 
     setTimeout(function () {
-      window.location.href = '/pages/borad/list'
+      document.body.style.overflow = 'auto';
+      setOanswer(false);
+      fetchData();
+      getWrdata();
+      getAnsdata();
     }, 3000);
   };
   //오답 함수
@@ -126,10 +130,12 @@ export default function page() {
   //오답에서 예/아니오
   const youSaidYes = function(){
     setXanswer(false);
-    window.location.reload();
+    getAnsdata()
+    document.body.style.overflow = 'auto';
   }
   const youSaidNo = ()=>{
-    window.location.href = '/pages/borad/list'
+    document.body.style.overflow = 'auto';
+    window.location.href = '/pages/borad/list'    
   };
 
   //오답리스트 박스 열기

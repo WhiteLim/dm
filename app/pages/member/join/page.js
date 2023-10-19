@@ -25,8 +25,8 @@ export default function page() {
   useEffect(()=>{
     setTest(list);
     const id = sessionStorage.u_id;
-    !id ? n.push('/pages/intro') : setMb_id(id);
-
+    //!id ? n.push('/pages/intro') : setMb_id(id);
+    setMb_id(id);
     const date = new Date();
     const y = date.getFullYear();
     const m = date.getMonth() + 1;
