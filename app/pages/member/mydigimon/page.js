@@ -62,6 +62,7 @@ export default function page() {
         setList([])
         const send = { mb_id: member.mb_id, dg_id: id }
         const rmdata = await axios.post('/api/member/mydigimon/rm', send)
+        setData(rmdata.data);
         if (rmdata.data) {
             digimonlist(rmdata.data)
         }
@@ -102,7 +103,7 @@ export default function page() {
                                 {
                                     list.length <= 0 ?
                                         <li className={my.nondata}>
-                                            <p>Lodding...</p>
+                                            <p>Loading...</p>
                                             <img src="/img/intro/intro.gif" alt='' />
                                         </li>
                                         : list?.slice(0, page).map((v, k) => (
