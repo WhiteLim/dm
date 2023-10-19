@@ -49,7 +49,7 @@ export default function Join2({setList,setNickName,setUimg}) {
     elImg.current.childNodes[0].childNodes[n].childNodes[0].classList.remove(join.active)
     elImg.current.childNodes[0].childNodes[k-1].childNodes[0].classList.add(join.active)
     n=k-1;
-    setIi(k);
+    setIi(k-1);
   }
   const con2Click = ()=>{
     let nickNames = input.current.value;

@@ -214,7 +214,7 @@ export default function Page() {
                       <div className={li.digimon}>
                         <img src={v.image} onError={handleImgError} className={`${li.digi_picture} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Digimon Image" />
                         <p>
-                          <img src={'/img/detail/mask.png'} className={`${li.mask} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Mask" />
+                          <img src={'/img/detail/overview.png'} className={`${li.mask} ${mdg?.some(n => n.dg_id == v.id) && li.active || li.null} `} alt="Mask" />
                         </p>
                       </div>
                     </Link>

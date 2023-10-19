@@ -79,7 +79,6 @@ const getFile = async function(){
 
   //alert창 열고 닫기
   const alertOpen = (text) =>{
-    console.log('a');
     setAltext(text)
     setIsAlertOpen(true);
   };
@@ -90,7 +89,6 @@ const getFile = async function(){
   const moving = (link)=>{
     nav.push(link)
   }
-console.log(isAlertOpen);
 
   const ser = (e)=>{
     e.preventDefault();
