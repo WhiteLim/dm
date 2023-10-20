@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 export default function Lodding() {
+  
+  useEffect(()=>{
+    const body = document.querySelector('body')
+    body.style.overflow = 'auto'
+    console.log('a');
+},[])
+
   return (
     <div className='Lodding'>
         <video className='bg_video' autoPlay muted loop playsInline src='/img/background.mp4'/>

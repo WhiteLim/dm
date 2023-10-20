@@ -174,7 +174,7 @@ export default function Page() {
           <form onSubmit={searching}>
             <label htmlFor="search_box">
               <input id='search_box' type='search' name="search"
-                maxLength='15' placeholder='디지몬을 검색해보세요.(영문검색)' pattern="[A-Za-z]+"
+                maxLength='15' placeholder='디지몬을 검색해보세요.(영문)' pattern="[A-Za-z]+"
                 value={searchText} onChange={(e) => setSearchText(e.target.value)} />
             </label>
             <label htmlFor="submit_btn">

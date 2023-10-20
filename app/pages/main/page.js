@@ -71,9 +71,10 @@ const getFile = async function(){
   
   useEffect(()=>{
     //input.current.focus();
-    fetchData()
-    randigimon()
-    getFile(); getdigimon()
+    fetchData();
+    randigimon();
+    getFile(); 
+    getdigimon();
   },[]);
   
 
