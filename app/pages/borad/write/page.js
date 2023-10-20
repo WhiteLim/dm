@@ -238,11 +238,13 @@ shuffleArray(RandomkrDigimon );
   };
   
   const searchKeyPress = (e) => {
-    if (e.key === 'Enter') {
       e.preventDefault(); 
-      letsSearch();
-    }
+      setSearchByName(e.target.value)
   };
+
+  useEffect(()=>{
+    letsSearch();
+  },[searchByName])
 
   //클릭한 디지몬 저장
   const [selectedDigimon, setSelectedDigimon] = useState('');
@@ -362,7 +364,7 @@ shuffleArray(RandomkrDigimon );
             <div className={style.wrapSearch}>
               <input className={style.searchInput} type='text' 
                 placeholder='디지몬을 검색해보세요'
-                onChange={(e)=> setSearchByName(e.target.value)}
+                onChange={(e)=> searchKeyPress}
                 onKeyPress={searchKeyPress}  
               />
               <div className={style.searchBtn} onClick={letsSearch}>

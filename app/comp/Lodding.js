@@ -5,7 +5,6 @@ export default function Lodding() {
   useEffect(()=>{
     const body = document.querySelector('body')
     body.style.overflow = 'auto'
-    console.log('a');
 },[])
 
   return (

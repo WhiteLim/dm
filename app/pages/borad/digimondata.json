@@ -1286,19 +1286,9 @@
       "image":  "https://digimon-api.com/images/digimon/w/Lord_Knightmon.png"
     },
     {
-      "id": 1036,
-      "name": "알포스브이드라몬",
-      "image":  "https://digimon-api.com/images/digimon/w/Ulforce_V-dramon.png"
-    },
-    {
       "id": 974,
       "name": "청룡몬",
       "image":  "https://digimon-api.com/images/digimon/w/Qinglongmon.png"
-    },
-    {
-      "id": 595,
-      "name": "에어로브이드라몬",
-      "image":  "https://digimon-api.com/images/digimon/w/Aero_V-dramon.png"
     },
     {
       "id": 302,
@@ -1479,11 +1469,6 @@
       "id":748,
       "name": "샤벨레오몬",
       "image":  "https://digimon-api.com/images/digimon/w/Saber_Leomon.png"
-    },
-    {
-      "id":784,
-      "name": "쥬레이몬",
-      "image":  "https://digimon-api.com/images/digimon/w/Jyureimon.png"
     },
     {
       "id":1390,
