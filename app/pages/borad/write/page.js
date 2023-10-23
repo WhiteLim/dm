@@ -13,6 +13,8 @@ export default function page() {
   let [lineSize,setLineSize] = useState(1);
   let [undoArray, setUndoArray] = useState([]);
 
+  let Svar = useRef();
+
 
   /* 회원정보 */
   let [dataURL, setDataURL] = useState();
@@ -236,6 +238,10 @@ shuffleArray(RandomkrDigimon );
     setShowAll(false);
     setIfNoDigimon(result.length === 0);
   };
+
+  const btnSearch = () => {
+    setSearchByName(Svar.current.value)
+  }
   
   const searchKeyPress = (e) => {
       e.preventDefault(); 
@@ -243,7 +249,9 @@ shuffleArray(RandomkrDigimon );
   };
 
   useEffect(()=>{
-    letsSearch();
+    if(searchByName != '') {
+      letsSearch();
+    }
   },[searchByName])
 
   //클릭한 디지몬 저장
@@ -363,11 +371,11 @@ shuffleArray(RandomkrDigimon );
           <div className={style.searchBg}>
             <div className={style.wrapSearch}>
               <input className={style.searchInput} type='text' 
-                placeholder='디지몬을 검색해보세요'
+                placeholder='디지몬을 검색해보세요' ref={Svar}
                 onChange={(e)=> searchKeyPress}
                 onKeyPress={searchKeyPress}  
               />
-              <div className={style.searchBtn} onClick={letsSearch}>
+              <div className={style.searchBtn} onClick={btnSearch}>
                 <img src='/img/board/write/searchBtn.png'/>
               </div>
             </div>
